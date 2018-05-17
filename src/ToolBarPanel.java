@@ -118,6 +118,9 @@ public class ToolBarPanel extends JPanel {
         pauseDownload.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+
+                DownloadPanel.pauseDownloads();
+                MainFrame.updateDownloadPanel();
                 System.out.println("pause download ...");
             }
         });
@@ -125,6 +128,9 @@ public class ToolBarPanel extends JPanel {
         continueDownload.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+
+               DownloadPanel.continueDownloads();
+               MainFrame.updateDownloadPanel();
                 System.out.println("continue download ...");
             }
         });

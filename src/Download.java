@@ -19,7 +19,7 @@ public class Download implements Serializable {
         this.url = url ;
 
         this.name = "download" ;
-        this.status = "status" ;
+        this.status = "completed" ;
         this.finishedTime = " finish time" ;
         this.size = "size" ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;

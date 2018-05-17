@@ -46,11 +46,26 @@ public class ProccessingPanel extends JPanel {
         queueButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                DownloadsQueueFrame downloadsQueueFrame = new DownloadsQueueFrame() ;
+                DownloadsQueueFrame.downloadsQueueFrame = null ;
+                DownloadsQueueFrame downloadsQueueFrame = DownloadsQueueFrame.getInstance() ;
             }
         });
 
+        completedButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                DownloadPanel.setDownloadsList(DownloadPanel.completedDownloadsList);
+                MainFrame.updateDownloadPanel();
+            }
+        });
 
+        processingButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                DownloadPanel.setDownloadsList(DownloadPanel.progressDownloadlist);
+                MainFrame.updateDownloadPanel();
+            }
+        });
 
     }
 

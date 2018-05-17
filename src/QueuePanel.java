@@ -10,7 +10,7 @@ public class QueuePanel extends JPanel {
     private JProgressBar progressBar;
     public static ArrayList<Download> downloadsList = new ArrayList<Download>();
     public static ArrayList<JPanel> downloadPanels;
-    private MainFrame mainFrame = MainFrame.getInstance();
+    private DownloadsQueueFrame downloadsQueueFrame = DownloadsQueueFrame.getInstance() ;
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
 
     public QueuePanel() {
@@ -98,14 +98,14 @@ public class QueuePanel extends JPanel {
                         if (isSelected(panel)) {
                             System.out.println("salam");
                             unselectPanel(panel);
-                            mainFrame.revalidate();
-                            mainFrame.repaint();
+                            downloadsQueueFrame.revalidate();
+                            downloadsQueueFrame.repaint();
                         } else {
                             System.out.println("salam");
                             selectPanel(panel);
 
-                            mainFrame.revalidate();
-                            mainFrame.repaint();
+                            downloadsQueueFrame.revalidate();
+                            downloadsQueueFrame.repaint();
                         }
                     }
 
@@ -156,8 +156,8 @@ public class QueuePanel extends JPanel {
         downloadsList.remove(downloadPanels.indexOf(panel));
         downloadPanels.remove(panel);
         MainFrame.updateDownloadPanel();
-        mainFrame.revalidate();
-        mainFrame.repaint();
+        downloadsQueueFrame.revalidate();
+        downloadsQueueFrame.repaint();
     }
 
 

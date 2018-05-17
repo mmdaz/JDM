@@ -13,6 +13,7 @@ public class DownloadPanel extends JPanel implements Serializable {
     public static ArrayList<JPanel> downloadPanels;
     private MainFrame mainFrame = MainFrame.getInstance();
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
+    public static ArrayList<Download> progressDownloadlist = new ArrayList<Download>() ;
 
     public DownloadPanel() {
 
@@ -25,6 +26,10 @@ public class DownloadPanel extends JPanel implements Serializable {
         progressBar.setValue(50);
         progressBar.setStringPainted(true);
 
+
+        // **
+        addCompletedDownload();
+        addProgresssDownload();
 
         // all download panels added to this panel and this panel addedP to the scrollpane
         // and scroll pane added to the panel of this class :
@@ -40,7 +45,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 
         for (Download download : downloadsList) {
 
-            JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "</html>");
+            JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() +"<br/>"+download.getStatus()+ "</html>");
             downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
             downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
             downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
@@ -50,6 +55,7 @@ public class DownloadPanel extends JPanel implements Serializable {
             panel.setBorder(BorderFactory.createCompoundBorder());
             downloadPanels.add(panel);
         }
+
 
         // add panels to the mainPanel :
 
@@ -117,6 +123,9 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
+    public static void setDownloadsList(ArrayList<Download> downloadsList) {
+        DownloadPanel.downloadsList = downloadsList;
+    }
 
     public ArrayList<Download> getDownloadsList() {
         return downloadsList;
@@ -125,7 +134,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 
 
     public static void addDownload(Download download) {
-        downloadsList.add(download);
+        progressDownloadlist.add(download);
     }
 
 
@@ -177,43 +186,15 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
-    public void setDownloadsList(ArrayList<Download> downloadsList) {
-        this.downloadsList = downloadsList;
-    }
 
-    public void sortByCreateTime() {
 
-        int size = downloadsList.size();
+    public static void addProgresssDownload () {
 
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1 - i; j++) {
-                if (downloadsList.get(j + 1) == earlyDownload(downloadsList.get(j), downloadsList.get(j + 1))) {
-                    swapDownloadInArrayList(j, j + 1);
-                }
+        for (Download download : downloadsList) {
+            if (download.getStatus().equals("downloading...")) {
+                progressDownloadlist.add(download);
             }
-
         }
-
-    }
-
-    private Download earlyDownload(Download download1, Download download2) {
-
-        Integer date1 = Integer.parseInt(download1.getCreatedTime());
-        Integer date2 = Integer.parseInt(download2.getCreatedTime());
-
-        if (date1 < date2) {
-            return download1;
-        }
-        return download2;
-
-    }
-
-
-    public void swapDownloadInArrayList(int i1, int i2) {
-
-        Download temp = downloadsList.get(i1);
-        downloadsList.set(i1, downloadsList.get(i2));
-        downloadsList.set(i2, temp);
     }
 
 
@@ -224,5 +205,32 @@ public class DownloadPanel extends JPanel implements Serializable {
                 completedDownloadsList.add(download);
             }
         }
+    }
+
+
+
+
+    public static void pauseDownloads() {
+
+        for (Download download : downloadsList ) {
+
+            if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
+                download.setStatus("Paused");
+            }
+
+        }
+
+    }
+
+    public static void continueDownloads () {
+        for (Download download : downloadsList ) {
+
+            if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
+                download.setStatus("downloading...");
+            }
+
+        }
+
+
     }
 }
