@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Download implements Serializable {
     private String name ;
@@ -20,7 +22,7 @@ public class Download implements Serializable {
         this.status = "status" ;
         this.finishedTime = " finish time" ;
         this.size = "size" ;
-        this.createdTime = " c time" ;
+        this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
         this.saveAdress = "s address" ;
 
         progressBar = new JProgressBar(0,100) ;

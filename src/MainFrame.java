@@ -26,6 +26,7 @@ public class MainFrame extends JFrame implements Serializable {
         if (mainFrame == null) {
 
             mainFrame = new MainFrame() ;
+            mainFrame.setTitle("MMDNI Download Manager");
             contentPain = new JPanel(new BorderLayout());
             downloadPanel = new DownloadPanel();
           //  downloadPanel.setDownloadsList(readDownloadListFromFile());

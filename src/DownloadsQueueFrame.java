@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,30 +10,65 @@ import java.util.List;
 
 public class DownloadsQueueFrame extends JFrame {
 
-    private List<Download> downloadsQueue ;
+    private JButton delete ;
+    private JButton sortByDate ;
+    private JButton sortByName ;
+    private JButton sortBySize ;
+    private JButton startQueue ;
+    private JButton puaseQueu ;
+    private JPanel contentPain ;
+    public static QueuePanel queuePanel ;
+
 
     public DownloadsQueueFrame () {
 
+        setSize(600,400);
+        QueuePanel queuePanel = new QueuePanel() ;
+        contentPain = new JPanel( new BorderLayout()) ;
+
+        // create and add buttons panel :
+
+
+        JPanel buttonsPanel = new JPanel( new GridLayout(1,5,5,5)) ;
+        delete = new JButton("Delete") ;
+        sortByDate = new JButton("Sort By Date ") ;
+        sortByName = new JButton("Sort By Name ") ;
+        sortBySize = new JButton("Sort By Size ") ;
+        startQueue = new JButton("Start") ;
+        puaseQueu = new JButton("Puase") ;
+        buttonsPanel.add(delete) ;
+        buttonsPanel.add(sortByDate) ;
+        buttonsPanel.add(sortByName) ;
+        buttonsPanel.add(sortBySize) ;
+
+        contentPain.add(queuePanel , BorderLayout.CENTER) ;
+        contentPain.add(buttonsPanel , BorderLayout.SOUTH) ;
+        add(contentPain);
+
+        setVisible(true);
+
+
+        // add  buttons action listener  :
+
+        delete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                QueuePanel.deleteFromDownloadList();
+                updateDownloadPanel();
+            }
+        });
+
+
     }
 
 
-    public void addTOQueue (Download download) {
-        downloadsQueue.add(download) ;
-    }
-
-    public void sortByCreateTime () {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        System.out.println(timeStamp);
-
-    }
-
-    private Download earlyDownload (Download download1 , Download download2) {
-
-         return download1 ;
+    private void updateDownloadPanel ( ) {
+        contentPain.remove(queuePanel);
+        queuePanel = new QueuePanel() ;
+        contentPain.add(queuePanel , BorderLayout.CENTER) ;
+        contentPain.revalidate();
+        contentPain.repaint();
 
     }
-
-
-
 
 }

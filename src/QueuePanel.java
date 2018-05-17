@@ -2,11 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DownloadPanel extends JPanel implements Serializable {
+public class QueuePanel extends JPanel {
 
     private JProgressBar progressBar;
     public static ArrayList<Download> downloadsList = new ArrayList<Download>();
@@ -14,7 +13,7 @@ public class DownloadPanel extends JPanel implements Serializable {
     private MainFrame mainFrame = MainFrame.getInstance();
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
 
-    public DownloadPanel() {
+    public QueuePanel() {
 
 //        downloadsList = new ArrayList<Download>() ;
         downloadPanels = new ArrayList<JPanel>();

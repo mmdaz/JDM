@@ -11,6 +11,7 @@ public class ProccessingPanel extends JPanel {
     private JButton processingButton ;
     private JButton completedButton ;
     private JButton defaultButton ;
+    private JButton queueButton ;
 
 
     public ProccessingPanel () {
@@ -19,13 +20,16 @@ public class ProccessingPanel extends JPanel {
         setPreferredSize( new Dimension(130,380));
         processingButton = new JButton("Processing") ;
         completedButton = new JButton("Completed") ;
+        queueButton = new JButton("Queue") ;
         defaultButton = new JButton("About") ;
-        JPanel buttonsPanel = new JPanel( new GridLayout(3,1,5,5)) ;
+        JPanel buttonsPanel = new JPanel( new GridLayout(4,1,5,5)) ;
         JPanel emptyPanel = new JPanel() ;
         emptyPanel.setBackground(Color.DARK_GRAY);
         buttonsPanel.add(processingButton) ;
         buttonsPanel.add(completedButton) ;
+        buttonsPanel.add(queueButton);
         buttonsPanel.add(defaultButton) ;
+
         add(buttonsPanel) ;
         add(emptyPanel) ;
 
@@ -36,6 +40,13 @@ public class ProccessingPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 HelpFrame helpFrame = new HelpFrame() ;
+            }
+        });
+
+        queueButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                DownloadsQueueFrame downloadsQueueFrame = new DownloadsQueueFrame() ;
             }
         });
 

@@ -13,13 +13,12 @@ public class Run {
 //       SettingsFrame settingsFrame = new SettingsFrame() ;
 //       DownloadFrame downloadFrame = new DownloadFrame() ;
 
-        UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();
-        for (UIManager.LookAndFeelInfo look : looks) {
-            System.out.println(look.getClassName());
-        }
+//        UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();
+//        for (UIManager.LookAndFeelInfo look : looks) {
+//            System.out.println(look.getClassName());
+//        }
 
-        DownloadsQueueFrame downloadsQueueFrame = new DownloadsQueueFrame() ;
-        downloadsQueueFrame.sortByCreateTime();
+       // DownloadsQueueFrame downloadsQueueFrame = new DownloadsQueueFrame() ;
 
 
     }
