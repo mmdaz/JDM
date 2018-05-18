@@ -13,6 +13,7 @@ public class ToolBarPanel extends JPanel {
     private JButton pauseDownload;
     private JButton continueDownload;
     private JButton cancelDownload;
+    private JButton addToQueue ;
     public static JButton setting;
     private JButton remove;
     private JMenuItem newDownloadItem ;
@@ -21,6 +22,7 @@ public class ToolBarPanel extends JPanel {
     private JMenuItem cancelDownloadItem ;
     private JMenuItem settingItem ;
     private JMenuItem removreItem ;
+    private JMenuItem deleteAll ;
     private JMenuItem exitItem ;
     private JMenuItem helpAndAbout ;
   //  public static final SettingsFrame settingsFrame = new SettingsFrame() ;
@@ -42,30 +44,35 @@ public class ToolBarPanel extends JPanel {
         setLayout( new BorderLayout());
         setPreferredSize(new Dimension(430, 100));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//        bottunsPanel.setPreferredSize( new Dimension(200,50));
         newDownload = new JButton();
-        newDownload.setSize(50, 50);
+        newDownload.setSize(45, 45);
         newDownload.setIcon(getGoodSizeImage("newDownload.png", newDownload));
         bottunsPanel.add(newDownload);
         pauseDownload = new JButton();
-        pauseDownload.setSize(50, 50);
+        pauseDownload.setSize(45, 45);
         pauseDownload.setIcon(getGoodSizeImage("pause.png", pauseDownload));
         bottunsPanel.add(pauseDownload);
         continueDownload = new JButton();
-        continueDownload.setSize(50, 50);
+        continueDownload.setSize(45, 45);
         continueDownload.setIcon(getGoodSizeImage("continue.png", continueDownload));
         bottunsPanel.add(continueDownload);
         cancelDownload = new JButton();
-        cancelDownload.setSize(50, 50);
+        cancelDownload.setSize(45, 45);
         cancelDownload.setIcon(getGoodSizeImage("cancel.png", cancelDownload));
         bottunsPanel.add(cancelDownload);
         setting = new JButton() ;
-        setting.setSize(50,50);
+        setting.setSize(45,45);
         setting.setIcon(getGoodSizeImage("settings.png",setting));
         bottunsPanel.add(setting);
         remove = new JButton() ;
-        remove.setSize(50,50);
+        remove.setSize(45,45);
         remove.setIcon(getGoodSizeImage("remove.png",remove));
         bottunsPanel.add(remove) ;
+        addToQueue = new JButton() ;
+        addToQueue.setSize(45,45);
+        addToQueue.setIcon(getGoodSizeImage("addToQueue.png",addToQueue));
+        bottunsPanel.add(addToQueue) ;
 
 
         // create a menubar and add it to this panel
@@ -76,11 +83,18 @@ public class ToolBarPanel extends JPanel {
         toolsMenu.setMnemonic(KeyEvent.VK_T);
         aboutMenu.setMnemonic(KeyEvent.VK_A);
         newDownloadItem = new JMenuItem("New Download ") ;
+        newDownload.setToolTipText("New Download");
         continueDownloadItem = new JMenuItem("Continue Download ") ;
+        continueDownload.setToolTipText("Continue Download");
         cancelDownloadItem = new JMenuItem("Cancel Download ") ;
+        cancelDownload.setToolTipText("Cancel Download ");
         pauseDownloadItem = new JMenuItem("Pause Download ") ;
+        pauseDownload.setToolTipText("Pause Download ");
         settingItem = new JMenuItem("Settings") ;
+        setting.setToolTipText("Settings");
         removreItem = new JMenuItem("Remove") ;
+        remove.setToolTipText("Remove");
+        deleteAll = new JMenuItem("Remove All") ;
         exitItem = new JMenuItem("Exit") ;
         helpAndAbout = new JMenuItem("Help & About") ;
         toolsMenu.add(newDownloadItem) ;
@@ -89,6 +103,7 @@ public class ToolBarPanel extends JPanel {
         toolsMenu.add(continueDownloadItem);
         toolsMenu.add(settingItem);
         toolsMenu.add(removreItem) ;
+        toolsMenu.add(deleteAll) ;
         toolsMenu.add(exitItem) ;
         aboutMenu.add(helpAndAbout) ;
         menuBar.add(toolsMenu) ;
@@ -120,7 +135,7 @@ public class ToolBarPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
 
                 DownloadPanel.pauseDownloads();
-                MainFrame.updateDownloadPanel();
+                MainFrame.updateDownloadPanel(1);
                 System.out.println("pause download ...");
             }
         });
@@ -130,7 +145,7 @@ public class ToolBarPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
 
                DownloadPanel.continueDownloads();
-               MainFrame.updateDownloadPanel();
+               MainFrame.updateDownloadPanel(1);
                 System.out.println("continue download ...");
             }
         });
@@ -147,9 +162,18 @@ public class ToolBarPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 System.out.println("remove download ...");
                 DownloadPanel.deleteFromDownloadList();
-                MainFrame.updateDownloadPanel();
+                MainFrame.updateDownloadPanel(1);
+              //  MainFrame.updateDownloadPanel(2);
             }
         });
+
+        addToQueue.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                DownloadPanel.addSelectedDownloadsToQueue();
+            }
+        });
+
 
         // add Items Actionlisteners :
 
@@ -170,6 +194,8 @@ public class ToolBarPanel extends JPanel {
         continueDownloadItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                DownloadPanel.continueDownloads();
+                MainFrame.updateDownloadPanel(1);
                 System.out.println("continue download ...");
             }
         });
@@ -177,6 +203,8 @@ public class ToolBarPanel extends JPanel {
         pauseDownloadItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                DownloadPanel.pauseDownloads();
+                MainFrame.updateDownloadPanel(1);
                 System.out.println("pause download ...");
             }
         });
@@ -184,6 +212,8 @@ public class ToolBarPanel extends JPanel {
         removreItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                DownloadPanel.deleteFromDownloadList();
+                MainFrame.updateDownloadPanel(1);
                 System.out.println("remove download ...");
             }
         });
@@ -210,6 +240,15 @@ public class ToolBarPanel extends JPanel {
         });
 
 
+        deleteAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                DownloadPanel.downloadsList.clear();
+                QueuePanel.downloadsList.clear();
+                MainFrame.updateDownloadPanel(1);
+            }
+        });
+
         // add accelactor to items :
 
         newDownloadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N , KeyEvent.CTRL_MASK));
@@ -220,6 +259,7 @@ public class ToolBarPanel extends JPanel {
         settingItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S , KeyEvent.CTRL_MASK));
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E , KeyEvent.CTRL_MASK));
         helpAndAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H , KeyEvent.CTRL_MASK));
+        deleteAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A , KeyEvent.CTRL_MASK));
 
     }
 

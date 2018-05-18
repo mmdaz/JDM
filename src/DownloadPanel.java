@@ -15,16 +15,17 @@ public class DownloadPanel extends JPanel implements Serializable {
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
     public static ArrayList<Download> progressDownloadlist = new ArrayList<Download>() ;
 
-    public DownloadPanel() {
+
+    public DownloadPanel( int coditionNumber ) {
 
 //        downloadsList = new ArrayList<Download>() ;
         downloadPanels = new ArrayList<JPanel>();
         // create the progressbar :
 
-        progressBar = new JProgressBar(0, 100);
-        progressBar.setBounds(40, 40, 160, 30);
-        progressBar.setValue(50);
-        progressBar.setStringPainted(true);
+//        progressBar = new JProgressBar(0, 100);
+//        progressBar.setBounds(40, 40, 160, 30);
+//        progressBar.setValue(50);
+//        progressBar.setStringPainted(true);
 
 
         // **
@@ -43,18 +44,39 @@ public class DownloadPanel extends JPanel implements Serializable {
         // create jlabel of each download panel for show  information of download :
 
 
-        for (Download download : downloadsList) {
+        if ( coditionNumber == 1) {
 
-            JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() +"<br/>"+download.getStatus()+ "</html>");
-            downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
-            downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-            downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(downloadInformationLabel, BorderLayout.CENTER);
-            panel.add(download.getProgressBar(), BorderLayout.SOUTH);
-            panel.setBorder(BorderFactory.createCompoundBorder());
-            downloadPanels.add(panel);
+
+            for (Download download : progressDownloadlist) {
+
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
         }
+        else if (coditionNumber == 2) {
+
+            for (Download download : completedDownloadsList) {
+
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
+        }
+
+
 
 
         // add panels to the mainPanel :
@@ -91,7 +113,7 @@ public class DownloadPanel extends JPanel implements Serializable {
         // set actionlistener for rightclick on downloadPanels and open a  download frame :
 
 
-        int counter = 0;
+
         for (JPanel panel : downloadPanels) {
 
             panel.addMouseListener(new MouseAdapter() {
@@ -165,7 +187,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 
         downloadsList.remove(downloadPanels.indexOf(panel));
         downloadPanels.remove(panel);
-        MainFrame.updateDownloadPanel();
+        MainFrame.updateDownloadPanel(1);
         mainFrame.revalidate();
         mainFrame.repaint();
     }
@@ -191,7 +213,7 @@ public class DownloadPanel extends JPanel implements Serializable {
     public static void addProgresssDownload () {
 
         for (Download download : downloadsList) {
-            if (download.getStatus().equals("downloading...")) {
+            if (download.getStatus().equals("downloading...") || download.getStatus().equals("Paused")) {
                 progressDownloadlist.add(download);
             }
         }
@@ -201,12 +223,24 @@ public class DownloadPanel extends JPanel implements Serializable {
     public static void addCompletedDownload() {
 
         for (Download download : downloadsList) {
+            completedDownloadsList.clear();
             if (download.getStatus().equals("completed")) {
                 completedDownloadsList.add(download);
             }
         }
     }
 
+    public static void addSelectedDownloadsToQueue () {
+
+        for (Download download : downloadsList) {
+
+            if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
+                QueuePanel.addDownload(download);
+            }
+
+        }
+
+    }
 
 
 

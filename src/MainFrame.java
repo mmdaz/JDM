@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements Serializable {
             mainFrame = new MainFrame() ;
             mainFrame.setTitle("MMDNI Download Manager");
             contentPain = new JPanel(new BorderLayout());
-            downloadPanel = new DownloadPanel();
+            downloadPanel = new DownloadPanel(1);
           //  downloadPanel.setDownloadsList(readDownloadListFromFile());
             mainFrame.setContentPane(contentPain);
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,10 +56,10 @@ public class MainFrame extends JFrame implements Serializable {
     }
 
 
-    public static void updateDownloadPanel ( ) {
+    public static void updateDownloadPanel (int conditionNumber ) {
 
         rightPanel.remove(downloadPanel);
-        downloadPanel = new DownloadPanel() ;
+        downloadPanel = new DownloadPanel(conditionNumber) ;
       //  saveDownloadList(downloadPanel);
         rightPanel.add(downloadPanel , BorderLayout.CENTER) ;
         System.out.println(downloadPanel.getDownloadsList().size());

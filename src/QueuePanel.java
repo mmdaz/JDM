@@ -148,14 +148,24 @@ public class QueuePanel extends JPanel {
         panel.setBackground(new Color(214, 217, 223));
     }
 
+    public static int selectedDownloadsNumber () {
 
+        int counter = 0 ;
 
+        for (JPanel panel : downloadPanels) {
+
+            if (isSelected(panel))
+                counter ++ ;
+        }
+
+        return counter ;
+    }
 
     public void deleteDownload(JPanel panel) {
 
         downloadsList.remove(downloadPanels.indexOf(panel));
         downloadPanels.remove(panel);
-        MainFrame.updateDownloadPanel();
+        MainFrame.updateDownloadPanel(1);
         downloadsQueueFrame.revalidate();
         downloadsQueueFrame.repaint();
     }
@@ -208,7 +218,41 @@ public class QueuePanel extends JPanel {
     }
 
 
-    public void swapDownloadInArrayList(int i1, int i2) {
+    public static void swapTwoDownloadInQueue () {
+
+        int i1 = 0  , i2 = 0  ;
+
+        if (selectedDownloadsNumber()==2) {
+
+            for (int i = 0 ; i < downloadPanels.size() ; i ++ ) {
+                if ( isSelected( downloadPanels.get(i))) {
+                    i1 = i ;
+                    break;
+                }
+
+            }
+
+            for (int i = i1 + 1 ; i < downloadPanels.size() ; i++ ) {
+                if (isSelected(downloadPanels.get(i))) {
+
+                    i2 = i ;
+                    break;
+                }
+
+            }
+
+            swapDownloadInArrayList(i1,i2);
+        }
+
+        else {
+
+            JOptionPane.showMessageDialog(DownloadsQueueFrame.getInstance(),"Select two downloads for swap .","Alert",JOptionPane.WARNING_MESSAGE);
+        }
+
+    }
+
+
+    public static void swapDownloadInArrayList(int i1, int i2) {
 
         Download temp = downloadsList.get(i1);
         downloadsList.set(i1, downloadsList.get(i2));
@@ -216,12 +260,5 @@ public class QueuePanel extends JPanel {
     }
 
 
-    public static void addCompletedDownload() {
 
-        for (Download download : downloadsList) {
-            if (download.getStatus().equals("completed")) {
-                completedDownloadsList.add(download);
-            }
-        }
-    }
 }

@@ -12,7 +12,7 @@ public class LogoPanel extends JPanel {
         setLayout( new FlowLayout());
         BufferedImage img = null ;
         try {
-            img = ImageIO.read( new File("icon1.jpg")) ;
+            img = ImageIO.read( new File("icon3.png")) ;
         } catch (IOException e) {
             e.printStackTrace();
         }

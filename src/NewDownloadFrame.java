@@ -76,7 +76,7 @@ public class NewDownloadFrame extends JFrame implements Serializable {
 //                System.out.println("save path : "+savePath);
                 DownloadPanel.addDownload(new Download(downloadAddressString));
                 DownloadPanel.setDownloadsList(DownloadPanel.progressDownloadlist);
-                MainFrame.updateDownloadPanel();
+                MainFrame.updateDownloadPanel(1);
                 dispose();
 
             }
@@ -90,7 +90,7 @@ public class NewDownloadFrame extends JFrame implements Serializable {
                 Download download = new Download(downloadAddressString) ;
                 QueuePanel.addDownload(download);
                 DownloadPanel.addDownload(download);
-                MainFrame.updateDownloadPanel();
+                MainFrame.updateDownloadPanel(1);
                 dispose();
             }
         });

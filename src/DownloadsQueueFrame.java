@@ -16,8 +16,9 @@ public class DownloadsQueueFrame extends JFrame {
     public static JButton sortBySize ;
     public static JButton startQueue ;
     public static JButton puaseQueue ;
+    public static JButton swapDownloads ;
     public static JPanel contentPain ;
-    public static JButton addNewDownload ;
+//    public static JButton addNewDownload ;
     public static QueuePanel queuePanel ;
     public static JPanel mainPanel ;
     public static DownloadsQueueFrame downloadsQueueFrame ;
@@ -50,14 +51,16 @@ public class DownloadsQueueFrame extends JFrame {
             sortBySize = new JButton("Sort By Size ");
             startQueue = new JButton("Start");
             puaseQueue = new JButton("Puase");
-            addNewDownload = new JButton("New Download") ;
+//            addNewDownload = new JButton("New Download") ;
+            swapDownloads = new JButton("Swap") ;
             buttonsPanel.add(delete);
             buttonsPanel.add(sortByDate);
             buttonsPanel.add(sortByName);
             buttonsPanel.add(sortBySize);
             buttonsPanel.add(startQueue) ;
             buttonsPanel.add(puaseQueue) ;
-            buttonsPanel.add(addNewDownload) ;
+//            buttonsPanel.add(addNewDownload) ;
+            buttonsPanel.add(swapDownloads) ;
 
 
             mainPanel = new JPanel(new BorderLayout());
@@ -80,10 +83,20 @@ public class DownloadsQueueFrame extends JFrame {
                 }
             });
 
-            addNewDownload.addMouseListener(new MouseAdapter() {
+//            addNewDownload.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mouseClicked(MouseEvent mouseEvent) {
+//                    NewDownloadFrame newDownloadFrame = new NewDownloadFrame() ;
+//                }
+//            });
+
+
+            swapDownloads.addMouseListener(new MouseAdapter() {
+
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-                    NewDownloadFrame newDownloadFrame = new NewDownloadFrame() ;
+                    QueuePanel.swapTwoDownloadInQueue();
+                    downloadsQueueFrame.updateDownloadPanel();
                 }
             });
 
