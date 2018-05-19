@@ -72,6 +72,7 @@ public class ToolBarPanel extends JPanel {
         addToQueue = new JButton() ;
         addToQueue.setSize(45,45);
         addToQueue.setIcon(getGoodSizeImage("addToQueue.png",addToQueue));
+        addToQueue.setToolTipText("Add To Queue");
         bottunsPanel.add(addToQueue) ;
 
 

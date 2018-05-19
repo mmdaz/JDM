@@ -79,6 +79,7 @@ public class DownloadsQueueFrame extends JFrame {
                 public void mouseClicked(MouseEvent mouseEvent) {
                     QueuePanel.deleteFromDownloadList();
                     downloadsQueueFrame.updateDownloadPanel();
+                    MainFrame.updateDownloadPanel(1);
                    // System.out.println(DownloadPanel.downloadsList.size());
                 }
             });

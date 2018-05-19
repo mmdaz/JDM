@@ -16,6 +16,7 @@ public class SettingsFrame extends JFrame  {
     private int sameDownloadNumbers ;
     private JRadioButton lookAndFill1 ;
     private JRadioButton lookAndFill2 ;
+    private JRadioButton defaultLook ;
 
 
 
@@ -60,13 +61,15 @@ public class SettingsFrame extends JFrame  {
 
 
 
-        lookAndFill1 = new JRadioButton("Look And Fill 1 ") ;
-        lookAndFill2 = new JRadioButton("Look And Fill 2 ") ;
+        lookAndFill1 = new JRadioButton("Look And Feel 1 ") ;
+        lookAndFill2 = new JRadioButton("Look And Feel 2 ") ;
+        defaultLook = new JRadioButton("Default") ;
         JPanel radioButtonsPanel = new JPanel( new BorderLayout()) ;
         JLabel setLAndF = new JLabel("<html><p style=\"text-align:center;\"> Select Look and Feel ...</p></html>") ;
         radioButtonsPanel.add(setLAndF ,BorderLayout.NORTH );
         radioButtonsPanel.add(lookAndFill1 ,BorderLayout.WEST);
         radioButtonsPanel.add(lookAndFill2 , BorderLayout.EAST);
+        radioButtonsPanel.add(defaultLook, BorderLayout.CENTER) ;
         radioButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
 
@@ -117,9 +120,11 @@ public class SettingsFrame extends JFrame  {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (lookAndFill1.isSelected()) {
                     lookAndFill2.setSelected(false);
+                    defaultLook.setSelected(false);
                     MainFrame mainFrame = MainFrame.getInstance() ;
                     try {
                         UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+                        SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (InstantiationException e) {
@@ -129,6 +134,7 @@ public class SettingsFrame extends JFrame  {
                     } catch (UnsupportedLookAndFeelException e) {
                         e.printStackTrace();
                     }
+                    SwingUtilities.updateComponentTreeUI(mainFrame);
                     mainFrame.revalidate();
                     mainFrame.repaint();
                }
@@ -140,6 +146,7 @@ public class SettingsFrame extends JFrame  {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (lookAndFill2.isSelected()) {
                     lookAndFill1.setSelected(false);
+                    defaultLook.setSelected(false);
                     MainFrame mainFrame = MainFrame.getInstance() ;
                     try {
                         UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
@@ -152,6 +159,34 @@ public class SettingsFrame extends JFrame  {
                     } catch (UnsupportedLookAndFeelException e) {
                         e.printStackTrace();
                     }
+                    SwingUtilities.updateComponentTreeUI(mainFrame);
+                    mainFrame.revalidate();
+                    mainFrame.repaint();
+                }
+            }
+        });
+
+
+        defaultLook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (defaultLook.isSelected()) {
+                    lookAndFill1.setSelected(false);
+                    lookAndFill2.setSelected(false);
+                    MainFrame mainFrame = MainFrame.getInstance() ;
+
+                    try {
+                        UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedLookAndFeelException e) {
+                        e.printStackTrace();
+                    }
+                    SwingUtilities.updateComponentTreeUI(mainFrame);
                     mainFrame.revalidate();
                     mainFrame.repaint();
                 }
