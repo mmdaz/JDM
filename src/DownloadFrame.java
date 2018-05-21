@@ -11,31 +11,29 @@ public class DownloadFrame extends JFrame {
     private JButton resume ;
     private Download download ;
     private JProgressBar progressBar ;
+    private JLabel informationLabel ;
+    private JPanel contentPain ;
 
 
     public  DownloadFrame ( Download download ) {
 
         setSize(500,200);
-        JPanel contentPain = new JPanel( new BorderLayout()) ;
+        contentPain = new JPanel( new BorderLayout()) ;
 
         // download information label :
 
-//        download = new Download("name" , "status" , "size" , "save Address" ,
-//                "createdtime" , "finished time" , "url" ) ;
-
         this.download = download ;
-
-        JLabel informationLabel = new JLabel("<html>file name : " + download.getName() + "<br>status : "+download.getStatus() +
+        informationLabel = new JLabel("<html>file name : " + download.getName() + "<br>status : "+download.getStatus() +
                 "\nsize : "+download.getSize() + "<br>created Time : "+download.getCreatedTime() + "<br>finished time : " +
                 download.getFinishedTime() + "<br>url : " +download.getUrl() +"</html>") ;
 
 
         // progressBar :
 
-        progressBar = new JProgressBar(0,100) ;
+        progressBar = new JProgressBar() ;
         progressBar.setBounds(40,40,160,30);
-        progressBar.setValue(0);
         progressBar.setStringPainted(true);
+        progressBar.setValue(download.getProgressBar().getValue());
 
 
 
@@ -71,6 +69,8 @@ public class DownloadFrame extends JFrame {
         cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+                download.setStatus("canceled");
+                MainFrame.updateDownloadPanel(3);
                 dispose();
             }
         });
@@ -78,6 +78,9 @@ public class DownloadFrame extends JFrame {
         resume.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+               download.setStatus("downloading...");
+               updateFrame();
+               MainFrame.updateDownloadPanel(1);
                 System.out.println("continue");
             }
         });
@@ -85,9 +88,30 @@ public class DownloadFrame extends JFrame {
         pause.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+                download.setStatus("Paused");
+                updateFrame();
+                MainFrame.updateDownloadPanel(3);
                 System.out.println("paused clicked ");
             }
         });
+
+
+    }
+
+
+    private void updateFrame () {
+
+        contentPain.remove(informationLabel);
+        informationLabel = new JLabel("<html>file name : " + download.getName() + "<br>status : "+download.getStatus() +
+                "\n<p>size</p> : "+download.getSize() + "<br>created Time : "+download.getCreatedTime() + "<br>finished time : " +
+                download.getFinishedTime() + "<br>url : " +download.getUrl() +"</html>") ;
+
+        contentPain.add(informationLabel , BorderLayout.NORTH) ;
+
+        contentPain.add(progressBar , BorderLayout.CENTER) ;
+
+        contentPain.revalidate();
+        contentPain.repaint();
 
 
 

@@ -154,6 +154,8 @@ public class ToolBarPanel extends JPanel {
         cancelDownload.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+                DownloadPanel.cancelDownload();
+                MainFrame.updateDownloadPanel(1);
                 System.out.println("cancel download ... ");
             }
         });

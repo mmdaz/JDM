@@ -18,8 +18,9 @@ public class ProccessingPanel extends JPanel {
     private JButton defaultButton ;
     private JButton queueButton ;
     private JButton searchButton ;
+    private JButton aboutButton ;
     private JTextField searchField ;
-    private ArrayList<Download> searchDownloadList ;
+    public static ArrayList<Download> searchDownloadList ;
 
 
     public ProccessingPanel () {
@@ -29,14 +30,16 @@ public class ProccessingPanel extends JPanel {
         processingButton = new JButton("Processing") ;
         completedButton = new JButton("Completed") ;
         queueButton = new JButton("Queue") ;
-        defaultButton = new JButton("About") ;
-        JPanel buttonsPanel = new JPanel( new GridLayout(4,1,5,5)) ;
+        defaultButton = new JButton("Default") ;
+        aboutButton = new JButton("About") ;
+        JPanel buttonsPanel = new JPanel( new GridLayout(5,1,5,5)) ;
         JPanel emptyPanel = new JPanel() ;
         emptyPanel.setBackground(Color.black);
         buttonsPanel.add(processingButton) ;
         buttonsPanel.add(completedButton) ;
         buttonsPanel.add(queueButton);
         buttonsPanel.add(defaultButton) ;
+        buttonsPanel.add(aboutButton) ;
         
 
         add(buttonsPanel) ;
@@ -45,7 +48,7 @@ public class ProccessingPanel extends JPanel {
 
         // add buttons actionlistener :
 
-        defaultButton.addMouseListener(new MouseAdapter() {
+        aboutButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 HelpFrame helpFrame = new HelpFrame() ;
@@ -73,6 +76,13 @@ public class ProccessingPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
               //  DownloadPanel.setDownloadsList(DownloadPanel.progressDownloadlist);
                 MainFrame.updateDownloadPanel(1);
+            }
+        });
+
+        defaultButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MainFrame.updateDownloadPanel(3);
             }
         });
 
@@ -109,8 +119,7 @@ public class ProccessingPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 search();
-                System.out.println(searchDownloadList.get(0).getUrl());
-                System.out.println(searchDownloadList.get(1).getUrl());
+                MainFrame.updateDownloadPanel(4);
             }
         });
 
@@ -133,7 +142,7 @@ public class ProccessingPanel extends JPanel {
 
     }
 
-    public ArrayList<Download> getSearchDownloadList() {
+    public static ArrayList<Download> getSearchDownloadList() {
         return searchDownloadList;
     }
 

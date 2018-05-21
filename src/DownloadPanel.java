@@ -43,51 +43,72 @@ public class DownloadPanel extends JPanel implements Serializable {
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // create jlabel of each download panel for show  information of download :
 
-//
-//        if ( coditionNumber == 1) {
-//
-//
-//            for (Download download : progressDownloadlist) {
-//
-//                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
-//                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
-//                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-//                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
-//                JPanel panel = new JPanel(new BorderLayout());
-//                panel.add(downloadInformationLabel, BorderLayout.CENTER);
-//                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
-//                panel.setBorder(BorderFactory.createCompoundBorder());
-//                downloadPanels.add(panel);
-//            }
-//        }
-//        else if (coditionNumber == 2) {
-//
-//            for (Download download : completedDownloadsList) {
-//
-//                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
-//                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
-//                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-//                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
-//                JPanel panel = new JPanel(new BorderLayout());
-//                panel.add(downloadInformationLabel, BorderLayout.CENTER);
-//                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
-//                panel.setBorder(BorderFactory.createCompoundBorder());
-//                downloadPanels.add(panel);
-//            }
-//        }
+
+        if ( coditionNumber == 1) {
 
 
-        for (Download download : downloadsList) {
+            for (Download download : progressDownloadlist) {
 
-            JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
-            downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
-            downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-            downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
-            JPanel panel = new JPanel(new BorderLayout());
-            panel.add(downloadInformationLabel, BorderLayout.CENTER);
-            panel.add(download.getProgressBar(), BorderLayout.SOUTH);
-            panel.setBorder(BorderFactory.createCompoundBorder());
-            downloadPanels.add(panel);
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
+        }
+        else if (coditionNumber == 2) {
+
+            for (Download download : completedDownloadsList) {
+
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
+        }
+
+
+        else if ( coditionNumber == 3 ) {
+
+            for (Download download : downloadsList) {
+
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
+
+        }
+
+        else if (coditionNumber == 4) {
+
+            for (Download download : ProccessingPanel.getSearchDownloadList()) {
+
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 50));
+                downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+                downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(downloadInformationLabel, BorderLayout.CENTER);
+                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.setBorder(BorderFactory.createCompoundBorder());
+                downloadPanels.add(panel);
+            }
+
         }
 
         // add panels to the mainPanel :
@@ -223,8 +244,10 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     public static void addProgresssDownload () {
 
+
+        progressDownloadlist.clear();
         for (Download download : downloadsList) {
-            if (download.getStatus().equals("downloading...") || download.getStatus().equals("Paused")) {
+            if (download.getStatus().equals("downloading...")) {
                 progressDownloadlist.add(download);
             }
         }
@@ -232,9 +255,8 @@ public class DownloadPanel extends JPanel implements Serializable {
 
 
     public static void addCompletedDownload() {
-
+        completedDownloadsList.clear();
         for (Download download : downloadsList) {
-            completedDownloadsList.clear();
             if (download.getStatus().equals("completed")) {
                 completedDownloadsList.add(download);
             }
@@ -257,21 +279,34 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     public static void pauseDownloads() {
 
-        for (Download download : downloadsList ) {
+      for (JPanel panel : downloadPanels ) {
+          if (isSelected(panel)) {
 
-            if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
-                download.setStatus("Paused");
-            }
+              downloadsList.get(downloadPanels.indexOf(panel)).setStatus("Paused");
+          }
 
-        }
+      }
 
     }
 
     public static void continueDownloads () {
-        for (Download download : downloadsList ) {
+        for (JPanel panel : downloadPanels ) {
+            if (isSelected(panel)) {
 
-            if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
-                download.setStatus("downloading...");
+                downloadsList.get(downloadPanels.indexOf(panel)).setStatus("downloading...");
+            }
+
+        }
+
+
+    }
+
+    public static void cancelDownload () {
+
+        for (JPanel panel : downloadPanels ) {
+            if (isSelected(panel)) {
+
+                downloadsList.get(downloadPanels.indexOf(panel)).setStatus("canceled");
             }
 
         }

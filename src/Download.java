@@ -19,7 +19,7 @@ public class Download implements Serializable {
         this.url = url ;
 
         this.name = "download" ;
-        this.status = "completed" ;
+        this.status = "downloading..." ;
         this.finishedTime = " finish time" ;
         this.size = "size" ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
@@ -31,6 +31,19 @@ public class Download implements Serializable {
         progressBar.setStringPainted(true);
 
 
+
+    }
+
+    public Download (Download anotherDownload) {
+
+        this.name = anotherDownload.name ;
+        this.createdTime = anotherDownload.createdTime ;
+        this.finishedTime = anotherDownload.finishedTime ;
+        this.progressBar = anotherDownload.progressBar ;
+        this.saveAdress = anotherDownload.saveAdress ;
+        this.size = anotherDownload.size ;
+        this.status = anotherDownload.status ;
+        this.url = anotherDownload.url ;
 
     }
 
