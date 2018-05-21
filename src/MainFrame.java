@@ -1,6 +1,8 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -18,6 +20,39 @@ public class MainFrame extends JFrame implements Serializable {
 
     private MainFrame () {
 
+
+        if (SystemTray.isSupported()) {
+
+            SystemTray systemTray = SystemTray.getSystemTray();
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(getClass().getResource("icon3.png"));
+            PopupMenu popupMenu = new PopupMenu();
+            TrayIcon icon = new TrayIcon(image, "JDM Program", popupMenu);
+            MenuItem openItem = new MenuItem("Open JDM");
+            openItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    mainFrame.setVisible(true);
+                }
+            });
+            popupMenu.add(openItem);
+
+            MenuItem closeItem = new MenuItem("Close JDM");
+            closeItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    SystemTray.getSystemTray().remove(icon);
+                    System.exit(0);
+                }
+            });
+            popupMenu.add(closeItem);
+            icon.setImageAutoSize(true);
+            try {
+                systemTray.add(icon);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static  MainFrame getInstance () {
@@ -47,7 +82,12 @@ public class MainFrame extends JFrame implements Serializable {
             rightPanel.add(downloadPanel, BorderLayout.CENTER);
             contentPain.add(leftPanel, BorderLayout.WEST);
             contentPain.add(rightPanel, BorderLayout.CENTER);
+//            DownloadPanel.setDownloadsList(loadDownloadList());
+//            updateDownloadPanel(1);
             mainFrame.setVisible(true);
+//            System.out.println(loadDownloadList().get(0).getStatus());
+
+//            System.out.printf(proccessingPanel.getSearchDownloadList().get(0).getUrl());
 
         }
 
@@ -60,10 +100,10 @@ public class MainFrame extends JFrame implements Serializable {
 
         rightPanel.remove(downloadPanel);
         downloadPanel = new DownloadPanel(conditionNumber) ;
-      //  saveDownloadList(downloadPanel);
+//        saveDownloadList(downloadPanel);
         rightPanel.add(downloadPanel , BorderLayout.CENTER) ;
         System.out.println(downloadPanel.getDownloadsList().size());
-        contentPain.validate();
+        contentPain.revalidate();
         contentPain.repaint();
 
     }
@@ -80,13 +120,10 @@ public class MainFrame extends JFrame implements Serializable {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//        finally {
-//
-//        }
 //    }
-
-
-//    public static ArrayList<Download> readDownloadListFromFile () {
+//
+//
+//    public static ArrayList<Download> loadDownloadList () {
 //
 //        ArrayList<Download> downloadList = new ArrayList<Download>() ;
 //
@@ -102,6 +139,7 @@ public class MainFrame extends JFrame implements Serializable {
 //        } catch (ClassNotFoundException e) {
 //            e.printStackTrace();
 //        }
+//
 //
 //        return downloadList ;
 //
