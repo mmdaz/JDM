@@ -33,7 +33,7 @@ public class DownloadFrame extends JFrame {
         progressBar = new JProgressBar() ;
         progressBar.setBounds(40,40,160,30);
         progressBar.setStringPainted(true);
-        progressBar.setValue(download.getProgressBar().getValue());
+        progressBar.setValue(download.getProgressValue()) ;
 
 
 

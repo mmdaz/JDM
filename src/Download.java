@@ -11,7 +11,7 @@ public class Download implements Serializable {
     private String createdTime ;
     private String finishedTime ;
     private String url ;
-    private JProgressBar progressBar ;
+    private int progressValue ;
 
 
 
@@ -24,12 +24,7 @@ public class Download implements Serializable {
         this.size = "size" ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
         this.saveAdress = "s address" ;
-
-        progressBar = new JProgressBar(0,100) ;
-        progressBar.setBounds(40,40,160,30);
-        progressBar.setValue(50);
-        progressBar.setStringPainted(true);
-
+        this.progressValue = 50;
 
 
     }
@@ -39,7 +34,6 @@ public class Download implements Serializable {
         this.name = anotherDownload.name ;
         this.createdTime = anotherDownload.createdTime ;
         this.finishedTime = anotherDownload.finishedTime ;
-        this.progressBar = anotherDownload.progressBar ;
         this.saveAdress = anotherDownload.saveAdress ;
         this.size = anotherDownload.size ;
         this.status = anotherDownload.status ;
@@ -56,12 +50,6 @@ public class Download implements Serializable {
         this.createdTime = " c time" ;
         this.url = "url" ;
         this.saveAdress = "s address" ;
-
-        progressBar = new JProgressBar(0,100) ;
-        progressBar.setBounds(40,40,160,30);
-        progressBar.setValue(0);
-        progressBar.setStringPainted(true);
-
     }
 
     public Download ( String name , String status , String size , String saveAdress , String createdTime , String finishedTime , String url ) {
@@ -73,11 +61,11 @@ public class Download implements Serializable {
         this.status = status ;
         this.url = url ;
 
-        progressBar = new JProgressBar(0,100) ;
-        progressBar.setBounds(40,40,160,30);
-        progressBar.setValue(0);
-        progressBar.setStringPainted(true);
+    }
 
+    public int getProgressValue () {
+
+        return progressValue ;
 
     }
 
@@ -89,9 +77,6 @@ public class Download implements Serializable {
         return createdTime;
     }
 
-    public JProgressBar getProgressBar() {
-        return progressBar;
-    }
 
     public String getFinishedTime() {
         return finishedTime;

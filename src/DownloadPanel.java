@@ -20,12 +20,6 @@ public class DownloadPanel extends JPanel implements Serializable {
 
 //        downloadsList = new ArrayList<Download>() ;
         downloadPanels = new ArrayList<JPanel>();
-        // create the progressbar :
-
-//        progressBar = new JProgressBar(0, 100);
-//        progressBar.setBounds(40, 40, 160, 30);
-//        progressBar.setValue(50);
-//        progressBar.setStringPainted(true);
 
 
         // **
@@ -39,9 +33,9 @@ public class DownloadPanel extends JPanel implements Serializable {
         int n = 1;
         GridLayout gridLayout = new GridLayout(n, 1, 5, 5);
         mainPanel.setLayout(gridLayout);
-        // mainPanel.setPreferredSize( new Dimension(300,300));
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // create jlabel of each download panel for show  information of download :
+
 
 
         if ( coditionNumber == 1) {
@@ -54,8 +48,12 @@ public class DownloadPanel extends JPanel implements Serializable {
                 downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
                 JPanel panel = new JPanel(new BorderLayout());
+                progressBar = new JProgressBar() ;
+                progressBar.setBounds(40, 40, 160, 30);
+                progressBar.setStringPainted(true);
+                progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.add(progressBar, BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -69,8 +67,12 @@ public class DownloadPanel extends JPanel implements Serializable {
                 downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
                 JPanel panel = new JPanel(new BorderLayout());
+                progressBar = new JProgressBar() ;
+                progressBar.setBounds(40, 40, 160, 30);
+                progressBar.setStringPainted(true);
+                progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.add(progressBar, BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -86,8 +88,12 @@ public class DownloadPanel extends JPanel implements Serializable {
                 downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
                 JPanel panel = new JPanel(new BorderLayout());
+                progressBar = new JProgressBar() ;
+                progressBar.setBounds(40, 40, 160, 30);
+                progressBar.setStringPainted(true);
+                progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.add(progressBar, BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -103,8 +109,12 @@ public class DownloadPanel extends JPanel implements Serializable {
                 downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
                 JPanel panel = new JPanel(new BorderLayout());
+                progressBar = new JProgressBar() ;
+                progressBar.setBounds(40, 40, 160, 30);
+                progressBar.setStringPainted(true);
+                progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+                panel.add(progressBar, BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }

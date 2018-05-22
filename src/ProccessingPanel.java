@@ -109,7 +109,7 @@ public class ProccessingPanel extends JPanel {
 
         searchbarPanel.add(searchButton , BorderLayout.EAST) ;
         searchField = new JTextField() ;
-        searchField.setPreferredSize( new Dimension(80,20));
+        searchField.setPreferredSize( new Dimension(80,15));
         searchbarPanel.add(searchField , BorderLayout.CENTER) ;
         emptyPanel.add(searchbarPanel) ;
 

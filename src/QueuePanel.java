@@ -11,11 +11,10 @@ public class QueuePanel extends JPanel {
     public static ArrayList<Download> downloadsList = new ArrayList<Download>();
     public static ArrayList<JPanel> downloadPanels;
     private DownloadsQueueFrame downloadsQueueFrame = DownloadsQueueFrame.getInstance() ;
-    public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
+
 
     public QueuePanel() {
 
-//        downloadsList = new ArrayList<Download>() ;
         downloadPanels = new ArrayList<JPanel>();
         // create the progressbar :
 
@@ -32,7 +31,6 @@ public class QueuePanel extends JPanel {
         int n = 1;
         GridLayout gridLayout = new GridLayout(n, 1, 5, 5);
         mainPanel.setLayout(gridLayout);
-        // mainPanel.setPreferredSize( new Dimension(300,300));
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         // create jlabel of each download panel for show  information of download :
 
@@ -44,22 +42,22 @@ public class QueuePanel extends JPanel {
             downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
             downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
             JPanel panel = new JPanel(new BorderLayout());
+            progressBar = new JProgressBar() ;
+            progressBar.setBounds(40, 40, 160, 30);
+            progressBar.setStringPainted(true);
+            progressBar.setValue(download.getProgressValue());
             panel.add(downloadInformationLabel, BorderLayout.CENTER);
-            panel.add(download.getProgressBar(), BorderLayout.SOUTH);
+            panel.add(progressBar, BorderLayout.SOUTH);
             panel.setBorder(BorderFactory.createCompoundBorder());
             downloadPanels.add(panel);
         }
 
         // add panels to the mainPanel :
 
-        // System.out.println("p"+downloadsList.size() +"d"+downloadsList.size());
-        //  int i = 0 ;
         for (JPanel panel : downloadPanels) {
             n++;
             mainPanel.add(panel);
             gridLayout.setRows(n);
-            //  System.out.println(downloadsList.get(i).getName());
-            // i ++ ;
         }
 
 
@@ -84,7 +82,6 @@ public class QueuePanel extends JPanel {
         // set actionlistener for rightclick on downloadPanels and open a  download frame :
 
 
-        int counter = 0;
         for (JPanel panel : downloadPanels) {
 
             panel.addMouseListener(new MouseAdapter() {
@@ -117,11 +114,15 @@ public class QueuePanel extends JPanel {
     }
 
 
-    public ArrayList<Download> getDownloadsList() {
+    public static ArrayList<Download> getDownloadsList() {
         return downloadsList;
     }
 
 
+
+    public static void setDownloadsList (ArrayList<Download> downloadsList) {
+        QueuePanel.downloadsList = downloadsList ;
+    }
 
     public static void addDownload(Download download) {
         downloadsList.add(download);
@@ -186,11 +187,7 @@ public class QueuePanel extends JPanel {
 
     }
 
-    public void setDownloadsList(ArrayList<Download> downloadsList) {
-        this.downloadsList = downloadsList;
-    }
-
-    public void sortByCreateTime() {
+    public static void sortByCreateTime() {
 
         int size = downloadsList.size();
 
@@ -205,7 +202,7 @@ public class QueuePanel extends JPanel {
 
     }
 
-    private Download earlyDownload(Download download1, Download download2) {
+    public static Download earlyDownload(Download download1, Download download2) {
 
         Integer date1 = Integer.parseInt(download1.getCreatedTime());
         Integer date2 = Integer.parseInt(download2.getCreatedTime());
@@ -223,24 +220,18 @@ public class QueuePanel extends JPanel {
         int i1 = 0  , i2 = 0  ;
 
         if (selectedDownloadsNumber()==2) {
-
             for (int i = 0 ; i < downloadPanels.size() ; i ++ ) {
                 if ( isSelected( downloadPanels.get(i))) {
                     i1 = i ;
                     break;
                 }
-
             }
-
             for (int i = i1 + 1 ; i < downloadPanels.size() ; i++ ) {
                 if (isSelected(downloadPanels.get(i))) {
-
                     i2 = i ;
                     break;
                 }
-
             }
-
             swapDownloadInArrayList(i1,i2);
         }
 

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +21,6 @@ public class DownloadsQueueFrame extends JFrame {
     public static JButton puaseQueue ;
     public static JButton swapDownloads ;
     public static JPanel contentPain ;
-//    public static JButton addNewDownload ;
     public static QueuePanel queuePanel ;
     public static JPanel mainPanel ;
     public static DownloadsQueueFrame downloadsQueueFrame ;
@@ -52,7 +52,6 @@ public class DownloadsQueueFrame extends JFrame {
             sortBySize = new JButton("Sort By Size ");
             startQueue = new JButton("Start");
             puaseQueue = new JButton("Puase");
-//            addNewDownload = new JButton("New Download") ;
             swapDownloads = new JButton("Swap") ;
             buttonsPanel.add(delete);
             buttonsPanel.add(sortByDate);
@@ -60,16 +59,18 @@ public class DownloadsQueueFrame extends JFrame {
             buttonsPanel.add(sortBySize);
             buttonsPanel.add(startQueue) ;
             buttonsPanel.add(puaseQueue) ;
-//            buttonsPanel.add(addNewDownload) ;
             buttonsPanel.add(swapDownloads) ;
 
 
             mainPanel = new JPanel(new BorderLayout());
+            if (loadQueue().size() != 0) {
+                QueuePanel.setDownloadsList(loadQueue());
+            }
             mainPanel.add(queuePanel, BorderLayout.CENTER);
             mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
             contentPain.add(mainPanel);
             downloadsQueueFrame.setContentPane(contentPain);
-
+            updateDownloadPanel();
             downloadsQueueFrame.setVisible(true);
 
 
@@ -85,14 +86,6 @@ public class DownloadsQueueFrame extends JFrame {
                 }
             });
 
-//            addNewDownload.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent mouseEvent) {
-//                    NewDownloadFrame newDownloadFrame = new NewDownloadFrame() ;
-//                }
-//            });
-
-
             swapDownloads.addMouseListener(new MouseAdapter() {
 
                 @Override
@@ -102,20 +95,70 @@ public class DownloadsQueueFrame extends JFrame {
                 }
             });
 
+
+            sortByDate.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    QueuePanel.sortByCreateTime();
+                    downloadsQueueFrame.updateDownloadPanel();
+                }
+            });
+
         }
         return downloadsQueueFrame ;
     }
 
 
-    public void updateDownloadPanel ( ) {
+    public static void updateDownloadPanel ( ) {
         mainPanel.remove(queuePanel);
         queuePanel = new QueuePanel() ;
         mainPanel.add(queuePanel, BorderLayout.CENTER) ;
+        saveQueue(queuePanel);
         contentPain.revalidate();
         contentPain.repaint();
-        revalidate();
-        repaint();
+        downloadsQueueFrame.revalidate();
+        downloadsQueueFrame.repaint();
 
     }
+
+
+    public static void saveQueue (QueuePanel queuePanel ) {
+
+        try (FileOutputStream fs = new FileOutputStream("queue.jdm")) {
+            ObjectOutputStream os = new ObjectOutputStream(fs) ;
+            ArrayList<Download> downloadList = QueuePanel.getDownloadsList() ;
+            os.writeObject(downloadList);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ArrayList<Download> loadQueue () {
+
+        ArrayList<Download> downloadList = new ArrayList<Download>() ;
+
+        try (FileInputStream fs = new FileInputStream("queue.jdm")) {
+
+            ObjectInputStream os = new ObjectInputStream(fs);
+
+            downloadList = (ArrayList<Download>) os.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return downloadList ;
+
+    }
+
 
 }

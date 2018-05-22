@@ -165,7 +165,9 @@ public class ToolBarPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 System.out.println("remove download ...");
                 DownloadPanel.deleteFromDownloadList();
+                QueuePanel.deleteFromDownloadList();
                 MainFrame.updateDownloadPanel(1);
+                DownloadsQueueFrame.updateDownloadPanel();
               //  MainFrame.updateDownloadPanel(2);
             }
         });
@@ -249,6 +251,7 @@ public class ToolBarPanel extends JPanel {
                 DownloadPanel.downloadsList.clear();
                 QueuePanel.downloadsList.clear();
                 MainFrame.updateDownloadPanel(1);
+                DownloadsQueueFrame.updateDownloadPanel();
             }
         });
 

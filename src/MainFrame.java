@@ -82,10 +82,11 @@ public class MainFrame extends JFrame implements Serializable {
             rightPanel.add(downloadPanel, BorderLayout.CENTER);
             contentPain.add(leftPanel, BorderLayout.WEST);
             contentPain.add(rightPanel, BorderLayout.CENTER);
-//            DownloadPanel.setDownloadsList(loadDownloadList());
-//            updateDownloadPanel(1);
+            if (loadDownloadList().size() != 0) {
+                DownloadPanel.setDownloadsList(loadDownloadList());
+            }
+            updateDownloadPanel(1);
             mainFrame.setVisible(true);
-//            System.out.println(loadDownloadList().get(0).getStatus());
 
 //            System.out.printf(proccessingPanel.getSearchDownloadList().get(0).getUrl());
 
@@ -100,7 +101,7 @@ public class MainFrame extends JFrame implements Serializable {
 
         rightPanel.remove(downloadPanel);
         downloadPanel = new DownloadPanel(conditionNumber) ;
-//        saveDownloadList(downloadPanel);
+        saveDownloadList(downloadPanel);
         rightPanel.add(downloadPanel , BorderLayout.CENTER) ;
         System.out.println(downloadPanel.getDownloadsList().size());
         contentPain.revalidate();
@@ -108,41 +109,41 @@ public class MainFrame extends JFrame implements Serializable {
 
     }
 
-//    public static void saveDownloadList (DownloadPanel downloadPanel ) {
-//
-//        try (FileOutputStream fs = new FileOutputStream("list.jdm")) {
-//            ObjectOutputStream os = new ObjectOutputStream(fs) ;
-//            ArrayList<Download> downloadList = downloadPanel.getDownloadsList() ;
-//            os.writeObject(downloadList);
-//        }
-//        catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
-//    public static ArrayList<Download> loadDownloadList () {
-//
-//        ArrayList<Download> downloadList = new ArrayList<Download>() ;
-//
-//        try (FileInputStream fs = new FileInputStream("list.jdm")) {
-//
-//            ObjectInputStream os = new ObjectInputStream(fs);
-//
-//             downloadList = (ArrayList<Download>) os.readObject();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        return downloadList ;
-//
-//    }
+    public static void saveDownloadList (DownloadPanel downloadPanel ) {
+
+        try (FileOutputStream fs = new FileOutputStream("list.jdm")) {
+            ObjectOutputStream os = new ObjectOutputStream(fs) ;
+            ArrayList<Download> downloadList = downloadPanel.getDownloadsList() ;
+            os.writeObject(downloadList);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static ArrayList<Download> loadDownloadList () {
+
+        ArrayList<Download> downloadList = new ArrayList<Download>() ;
+
+        try (FileInputStream fs = new FileInputStream("list.jdm")) {
+
+            ObjectInputStream os = new ObjectInputStream(fs);
+
+             downloadList = (ArrayList<Download>) os.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return downloadList ;
+
+    }
 
     }
