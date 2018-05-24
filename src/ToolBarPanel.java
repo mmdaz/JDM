@@ -3,8 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class ToolBarPanel extends JPanel {
 
@@ -24,7 +25,8 @@ public class ToolBarPanel extends JPanel {
     private JMenuItem removreItem ;
     private JMenuItem deleteAll ;
     private JMenuItem exitItem ;
-    private JMenuItem helpAndAbout ;
+    private JMenuItem helpAndAbout;
+    private JMenuItem export ;
   //  public static final SettingsFrame settingsFrame = new SettingsFrame() ;
 
 
@@ -44,34 +46,33 @@ public class ToolBarPanel extends JPanel {
         setLayout( new BorderLayout());
         setPreferredSize(new Dimension(430, 100));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//        bottunsPanel.setPreferredSize( new Dimension(200,50));
         newDownload = new JButton();
         newDownload.setSize(45, 45);
-        newDownload.setIcon(getGoodSizeImage("newDownload.png", newDownload));
+        newDownload.setIcon(getGoodSizeImage("Icons/newDownload.png", newDownload));
         bottunsPanel.add(newDownload);
         pauseDownload = new JButton();
         pauseDownload.setSize(45, 45);
-        pauseDownload.setIcon(getGoodSizeImage("pause.png", pauseDownload));
+        pauseDownload.setIcon(getGoodSizeImage("Icons/pause.png", pauseDownload));
         bottunsPanel.add(pauseDownload);
         continueDownload = new JButton();
         continueDownload.setSize(45, 45);
-        continueDownload.setIcon(getGoodSizeImage("continue.png", continueDownload));
+        continueDownload.setIcon(getGoodSizeImage("Icons/continue.png", continueDownload));
         bottunsPanel.add(continueDownload);
         cancelDownload = new JButton();
         cancelDownload.setSize(45, 45);
-        cancelDownload.setIcon(getGoodSizeImage("cancel.png", cancelDownload));
+        cancelDownload.setIcon(getGoodSizeImage("Icons/cancel.png", cancelDownload));
         bottunsPanel.add(cancelDownload);
         setting = new JButton() ;
         setting.setSize(45,45);
-        setting.setIcon(getGoodSizeImage("settings.png",setting));
+        setting.setIcon(getGoodSizeImage("Icons/settings.png",setting));
         bottunsPanel.add(setting);
         remove = new JButton() ;
         remove.setSize(45,45);
-        remove.setIcon(getGoodSizeImage("remove.png",remove));
+        remove.setIcon(getGoodSizeImage("Icons/remove.png",remove));
         bottunsPanel.add(remove) ;
         addToQueue = new JButton() ;
         addToQueue.setSize(45,45);
-        addToQueue.setIcon(getGoodSizeImage("addToQueue.png",addToQueue));
+        addToQueue.setIcon(getGoodSizeImage("Icons/addToQueue.png",addToQueue));
         addToQueue.setToolTipText("Add To Queue");
         bottunsPanel.add(addToQueue) ;
 
@@ -98,6 +99,7 @@ public class ToolBarPanel extends JPanel {
         deleteAll = new JMenuItem("Remove All") ;
         exitItem = new JMenuItem("Exit") ;
         helpAndAbout = new JMenuItem("Help & About") ;
+        export = new JMenuItem("Export") ;
         toolsMenu.add(newDownloadItem) ;
         toolsMenu.add(pauseDownloadItem) ;
         toolsMenu.add(cancelDownloadItem);
@@ -105,6 +107,7 @@ public class ToolBarPanel extends JPanel {
         toolsMenu.add(settingItem);
         toolsMenu.add(removreItem) ;
         toolsMenu.add(deleteAll) ;
+        toolsMenu.add(export) ;
         toolsMenu.add(exitItem) ;
         aboutMenu.add(helpAndAbout) ;
         menuBar.add(toolsMenu) ;
@@ -255,6 +258,13 @@ public class ToolBarPanel extends JPanel {
             }
         });
 
+        export.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getZip();
+            }
+        });
+
         // add accelactor to items :
 
         newDownloadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N , KeyEvent.CTRL_MASK));
@@ -266,6 +276,7 @@ public class ToolBarPanel extends JPanel {
         exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E , KeyEvent.CTRL_MASK));
         helpAndAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H , KeyEvent.CTRL_MASK));
         deleteAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A , KeyEvent.CTRL_MASK));
+        export.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X , KeyEvent.CTRL_MASK));
 
     }
 
@@ -284,6 +295,39 @@ public class ToolBarPanel extends JPanel {
         ImageIcon imageIcon = new ImageIcon(icon);
 
         return imageIcon;
+    }
+
+    private void getZip () {
+
+        String[] saveFiles = {"queue.jdm" , "list.jdm"} ;
+        String zipFile = "archive.zip" ;
+        try {
+            byte[] buffer = new byte[2048] ;
+            FileOutputStream fileOutputStream = new FileOutputStream(zipFile) ;
+            ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream) ;
+            for (int i = 0 ; i < saveFiles.length ; i++ ) {
+                File saveFile = new File(saveFiles[i]) ;
+                FileInputStream fileInputStream = new FileInputStream(saveFile) ;
+                zipOutputStream.putNextEntry( new ZipEntry(saveFile.getName()));
+
+                int length ;
+                while ((length = fileInputStream.read(buffer)) > 0) {
+
+                    zipOutputStream.write(buffer , 0 , length);
+                }
+
+                zipOutputStream.closeEntry();
+                fileInputStream.close();
+            }
+            zipOutputStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }

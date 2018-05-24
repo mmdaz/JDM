@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
+import java.util.ArrayList;
 
 
 public class SettingsFrame extends JFrame  {
@@ -17,11 +19,15 @@ public class SettingsFrame extends JFrame  {
     private JRadioButton lookAndFill1 ;
     private JRadioButton lookAndFill2 ;
     private JRadioButton defaultLook ;
+    private SettingInformation settingInformation ;
 
 
 
     public SettingsFrame () {
 
+        settingInformation = loadSetiings() ;
+        savePath = settingInformation.getSavePath();
+        sameDownloadNumbers = settingInformation.getSameTimeDownloads() ;
         setSize(500,400);
         setTitle("Settings");
         // create and add JSlider for the numbers of downloads in same time
@@ -32,6 +38,7 @@ public class SettingsFrame extends JFrame  {
         numberSelector.setPaintLabels(true);
         numberSelector.setMinorTickSpacing(1);
         numberSelector.setMajorTickSpacing(1);
+        numberSelector.setValue(settingInformation.getSameTimeDownloads());
         downloadNumberPanel.add(downloadNumberLabel , BorderLayout.NORTH) ;
         downloadNumberPanel.add(numberSelector , BorderLayout.SOUTH) ;
         downloadNumberLabel.setPreferredSize( new Dimension(300,100));
@@ -97,6 +104,9 @@ public class SettingsFrame extends JFrame  {
                 sameDownloadNumbers = numberSelector.getValue() ;
                 System.out.println("same download numbers : " + sameDownloadNumbers);
                 ToolBarPanel.setting.setEnabled(true);
+                settingInformation.setSameTimeDownloads(sameDownloadNumbers);
+                settingInformation.setSavePath(savePath);
+                saveSettings();
                 dispose();
             }
         }) ;
@@ -213,5 +223,41 @@ public class SettingsFrame extends JFrame  {
             }
         }
 
+    }
+
+
+    private void saveSettings () {
+
+        try (FileOutputStream fs = new FileOutputStream("Saves/setting.jdm")) {
+            ObjectOutputStream os = new ObjectOutputStream(fs) ;
+            os.writeObject(settingInformation);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private SettingInformation loadSetiings () {
+
+
+        SettingInformation loadInformation = new SettingInformation() ;
+
+        try (FileInputStream fs = new FileInputStream("Saves/setting.jdm")) {
+
+            ObjectInputStream os = new ObjectInputStream(fs);
+
+            loadInformation = (SettingInformation) os.readObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return loadInformation ;
     }
 }

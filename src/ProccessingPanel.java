@@ -40,7 +40,7 @@ public class ProccessingPanel extends JPanel {
         buttonsPanel.add(queueButton);
         buttonsPanel.add(defaultButton) ;
         buttonsPanel.add(aboutButton) ;
-        
+
 
         add(buttonsPanel) ;
         add(emptyPanel) ;
@@ -66,7 +66,7 @@ public class ProccessingPanel extends JPanel {
         completedButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-               // DownloadPanel.setDownloadsList(DownloadPanel.completedDownloadsList);
+                // DownloadPanel.setDownloadsList(DownloadPanel.completedDownloadsList);
                 MainFrame.updateDownloadPanel(2);
             }
         });
@@ -74,7 +74,7 @@ public class ProccessingPanel extends JPanel {
         processingButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-              //  DownloadPanel.setDownloadsList(DownloadPanel.progressDownloadlist);
+                //  DownloadPanel.setDownloadsList(DownloadPanel.progressDownloadlist);
                 MainFrame.updateDownloadPanel(1);
             }
         });
@@ -97,7 +97,7 @@ public class ProccessingPanel extends JPanel {
 
         BufferedImage img = null ;
         try {
-            img = ImageIO.read( new File("search1.png")) ;
+            img = ImageIO.read( new File("Icons/search1.png")) ;
         } catch (IOException e) {
             e.printStackTrace();
         }

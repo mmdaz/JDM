@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -177,6 +180,16 @@ public class DownloadPanel extends JPanel implements Serializable {
 
                             mainFrame.revalidate();
                             mainFrame.repaint();
+                        }
+                    }
+                    if (mouseEvent.getClickCount() == 2 && !mouseEvent.isConsumed()) {
+                        mouseEvent.consume();
+                        System.out.println("2  clicked");
+                        File file = new File("Icons/search1.png") ;
+                        try {
+                            Desktop.getDesktop().open(file);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 

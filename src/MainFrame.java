@@ -111,7 +111,7 @@ public class MainFrame extends JFrame implements Serializable {
 
     public static void saveDownloadList (DownloadPanel downloadPanel ) {
 
-        try (FileOutputStream fs = new FileOutputStream("list.jdm")) {
+        try (FileOutputStream fs = new FileOutputStream("Saves/list.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
             ArrayList<Download> downloadList = downloadPanel.getDownloadsList() ;
             os.writeObject(downloadList);
@@ -128,7 +128,7 @@ public class MainFrame extends JFrame implements Serializable {
 
         ArrayList<Download> downloadList = new ArrayList<Download>() ;
 
-        try (FileInputStream fs = new FileInputStream("list.jdm")) {
+        try (FileInputStream fs = new FileInputStream("Saves/list.jdm")) {
 
             ObjectInputStream os = new ObjectInputStream(fs);
 
