@@ -1,3 +1,5 @@
+import org.omg.CORBA.MARSHAL;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +29,10 @@ public class ToolBarPanel extends JPanel {
     private JMenuItem exitItem ;
     private JMenuItem helpAndAbout;
     private JMenuItem export ;
+    private JMenuItem sortByName ;
+    private JMenuItem sortByDate ;
+    private JMenuItem sortBySize ;
+
   //  public static final SettingsFrame settingsFrame = new SettingsFrame() ;
 
 
@@ -100,6 +106,9 @@ public class ToolBarPanel extends JPanel {
         exitItem = new JMenuItem("Exit") ;
         helpAndAbout = new JMenuItem("Help & About") ;
         export = new JMenuItem("Export") ;
+        sortByName = new JMenuItem("Sort By Name") ;
+        sortByDate = new JMenuItem("Sort By Date") ;
+        sortBySize = new JMenuItem("Sort By Size") ;
         toolsMenu.add(newDownloadItem) ;
         toolsMenu.add(pauseDownloadItem) ;
         toolsMenu.add(cancelDownloadItem);
@@ -108,6 +117,9 @@ public class ToolBarPanel extends JPanel {
         toolsMenu.add(removreItem) ;
         toolsMenu.add(deleteAll) ;
         toolsMenu.add(export) ;
+        toolsMenu.add(sortByName) ;
+        toolsMenu.add(sortByDate) ;
+        toolsMenu.add(sortBySize) ;
         toolsMenu.add(exitItem) ;
         aboutMenu.add(helpAndAbout) ;
         menuBar.add(toolsMenu) ;
@@ -252,7 +264,7 @@ public class ToolBarPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 DownloadPanel.downloadsList.clear();
-                QueuePanel.downloadsList.clear();
+              //  QueuePanel.downloadsList.clear();
                 MainFrame.updateDownloadPanel(1);
                 DownloadsQueueFrame.updateDownloadPanel();
             }
@@ -264,6 +276,24 @@ public class ToolBarPanel extends JPanel {
                 getZip();
             }
         });
+
+        sortByName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DownloadPanel.setDownloadsList(DownloadPanel.sortByName());
+                MainFrame.updateDownloadPanel(1);
+            }
+        });
+
+        sortBySize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DownloadPanel.setDownloadsList(DownloadPanel.sortBySize());
+                MainFrame.updateDownloadPanel(1);
+            }
+        });
+
+
 
         // add accelactor to items :
 

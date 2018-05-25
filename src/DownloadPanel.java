@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class DownloadPanel extends JPanel implements Serializable {
 
-    private JProgressBar progressBar;
+    public static JProgressBar progressBar;
     public static ArrayList<Download> downloadsList = new ArrayList<Download>();
     public static ArrayList<JPanel> downloadPanels;
     private MainFrame mainFrame = MainFrame.getInstance();
@@ -21,7 +23,6 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     public DownloadPanel( int coditionNumber ) {
 
-//        downloadsList = new ArrayList<Download>() ;
         downloadPanels = new ArrayList<JPanel>();
 
 
@@ -61,6 +62,7 @@ public class DownloadPanel extends JPanel implements Serializable {
                 downloadPanels.add(panel);
             }
         }
+
         else if (coditionNumber == 2) {
 
             for (Download download : completedDownloadsList) {
@@ -126,14 +128,11 @@ public class DownloadPanel extends JPanel implements Serializable {
 
         // add panels to the mainPanel :
 
-        // System.out.println("p"+downloadsList.size() +"d"+downloadsList.size());
-        //  int i = 0 ;
+
         for (JPanel panel : downloadPanels) {
             n++;
             mainPanel.add(panel);
             gridLayout.setRows(n);
-            //  System.out.println(downloadsList.get(i).getName());
-            // i ++ ;
         }
 
 
@@ -336,4 +335,48 @@ public class DownloadPanel extends JPanel implements Serializable {
 
 
     }
+
+    public static ArrayList<Download> sortByName () {
+
+        ArrayList<String> tempName = new ArrayList<String>() ;
+
+        for (Download download : downloadsList) {
+            tempName.add(download.getName()) ;
+        }
+        Collections.sort(tempName , String.CASE_INSENSITIVE_ORDER);
+
+        ArrayList<Download> sortedByNameList = new ArrayList<Download>() ;
+
+        for (String s : tempName) {
+            for (Download download : downloadsList) {
+                if (download.getName().equals(s)) {
+                    sortedByNameList.add(download) ;
+                }
+            }
+        }
+        return sortedByNameList ;
+    }
+
+    public static ArrayList<Download> sortBySize () {
+
+        ArrayList<Integer> tempSize = new ArrayList<Integer>() ;
+
+        for (Download download : downloadsList) {
+            tempSize.add(download.getSize()) ;
+        }
+        Collections.sort(tempSize);
+
+        ArrayList<Download> sortedByNameList = new ArrayList<Download>() ;
+
+        for (Integer s : tempSize) {
+            for (Download download : downloadsList) {
+                if (download.getSize() == s) {
+                    sortedByNameList.add(download) ;
+                }
+            }
+        }
+        return sortedByNameList ;
+    }
+
+
 }

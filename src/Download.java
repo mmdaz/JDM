@@ -6,7 +6,7 @@ import java.util.Calendar;
 public class Download implements Serializable {
     private String name ;
     private String status ;
-    private String size ;
+    private int size ;
     private String saveAdress ;
     private String createdTime ;
     private String finishedTime ;
@@ -18,10 +18,12 @@ public class Download implements Serializable {
     public Download ( String url ) {
         this.url = url ;
 
-        this.name = "download" ;
+
+        this.name = url ;
         this.status = "downloading..." ;
         this.finishedTime = " finish time" ;
-        this.size = "size" ;
+        Integer s = Integer.parseInt(url) ;
+        this.size = s ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
         this.saveAdress = "s address" ;
         this.progressValue = 50;
@@ -46,13 +48,13 @@ public class Download implements Serializable {
         this.name = "download" ;
         this.status = "status" ;
         this.finishedTime = " finish time" ;
-        this.size = "size" ;
+        this.size = 500 ;
         this.createdTime = " c time" ;
         this.url = "url" ;
         this.saveAdress = "s address" ;
     }
 
-    public Download ( String name , String status , String size , String saveAdress , String createdTime , String finishedTime , String url ) {
+    public Download ( String name , String status , int size , String saveAdress , String createdTime , String finishedTime , String url ) {
         this.name = name;
         this.createdTime = createdTime ;
         this.finishedTime = finishedTime ;
@@ -86,7 +88,7 @@ public class Download implements Serializable {
         return saveAdress;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -114,7 +116,7 @@ public class Download implements Serializable {
         this.saveAdress = saveAdress;
     }
 
-    public void setSize(String size) {
+    public void setSize(int size) {
         this.size = size;
     }
 

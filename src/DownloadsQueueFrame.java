@@ -111,7 +111,7 @@ public class DownloadsQueueFrame extends JFrame {
 
 
     public static void updateDownloadPanel ( ) {
-        mainPanel.remove(queuePanel);
+        mainPanel.remove(queuePanel) ;
         queuePanel = new QueuePanel() ;
         mainPanel.add(queuePanel, BorderLayout.CENTER) ;
         saveQueue(queuePanel);

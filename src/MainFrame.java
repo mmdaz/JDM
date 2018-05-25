@@ -89,7 +89,7 @@ public class MainFrame extends JFrame implements Serializable {
             mainFrame.setVisible(true);
 
 //            System.out.printf(proccessingPanel.getSearchDownloadList().get(0).getUrl());
-
+         DownloadPanel.sortByName();
         }
 
 
