@@ -2,30 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8dd9c599-94ea-47f0-8852-59c766102638" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DownloadFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HTTPDownloadUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saves/list.jdm" beforeDir="false" afterPath="$PROJECT_DIR$/Saves/list.jdm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saves/setting.jdm" beforeDir="false" afterPath="$PROJECT_DIR$/Saves/setting.jdm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/Download.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/Download.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/DownloadPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/DownloadPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/DownloadPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/DownloadPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingInformation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$FileChooserMouseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame$FileChooserMouseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JDM/SettingsFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/SettingsFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDM/ToolBarPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Download.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DownloadPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DownloadPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DownloadsQueueFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DownloadsQueueFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SettingInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SettingsFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ToolBarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ToolBarPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,32 +40,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ToolBarPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="291" column="47" selection-start-line="291" selection-start-column="47" selection-end-line="291" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SettingInformation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+            <state relative-caret-position="299">
+              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
               <folding>
-                <element signature="e#482#483#0" expanded="true" />
-                <element signature="e#513#514#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#799#800#0" expanded="true" />
+                <element signature="e#853#854#0" expanded="true" />
+                <element signature="e#832#833#0" expanded="true" />
+                <element signature="e#866#867#0" expanded="true" />
+                <element signature="e#931#932#0" expanded="true" />
+                <element signature="e#991#992#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SettingsFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
+            <state relative-caret-position="44">
+              <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
               <folding>
                 <element signature="e#3859#4389#0" expanded="true" />
                 <element signature="e#4388#4389#0" expanded="true" />
@@ -80,38 +75,57 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="134" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="531">
+              <caret line="91" selection-start-line="91" selection-end-line="91" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Run.java">
+        <entry file="file://$PROJECT_DIR$/src/Download.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="300">
+              <caret line="167" column="11" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3103#3104#0" expanded="true" />
+                <element signature="e#3153#3154#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DownloadsQueueFrame.java">
+        <entry file="file://$PROJECT_DIR$/src/HTTPDownloadUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="144" selection-start-line="144" selection-end-line="144" />
+            <state relative-caret-position="-420">
+              <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2569#2570#0" expanded="true" />
+                <element signature="e#2608#2609#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ProccessingPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/DownloadFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="555">
+              <caret line="37" column="49" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/NewDownloadFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="73" selection-start-line="73" selection-end-line="73" />
             </state>
           </provider>
         </entry>
@@ -119,32 +133,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DownloadPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-44">
-              <caret line="361" column="61" selection-start-line="361" selection-start-column="61" selection-end-line="361" selection-end-column="61" />
-              <folding>
-                <element signature="e#6993#8486#0" expanded="true" />
-                <element signature="e#8485#8486#0" expanded="true" />
-                <element signature="e#11748#11756#0" expanded="true" />
-                <element signature="e#12053#12063#0" expanded="true" />
-                <element signature="e#12217#12226#0" expanded="true" />
-                <element signature="e#12470#12480#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1252">
+              <caret line="363" column="13" selection-start-line="363" selection-start-column="13" selection-end-line="363" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Download.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ToolBarPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2435#2436#0" expanded="true" />
-                <element signature="e#2467#2468#0" expanded="true" />
-                <element signature="e#2807#2808#0" expanded="true" />
-                <element signature="e#2839#2840#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="143" selection-start-line="143" selection-end-line="143" />
             </state>
           </provider>
         </entry>
@@ -152,8 +151,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/QueuePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+            <state relative-caret-position="329">
+              <caret line="177" selection-start-line="177" selection-end-line="177" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -188,24 +187,26 @@
         <option value="$PROJECT_DIR$/src/Run.java" />
         <option value="$PROJECT_DIR$/src/NewDownloadFrame.java" />
         <option value="$PROJECT_DIR$/src/DownloadFrame.java" />
-        <option value="$PROJECT_DIR$/src/QueuePanel.java" />
-        <option value="$PROJECT_DIR$/src/SettingInformation.java" />
         <option value="$PROJECT_DIR$/src/LogoPanel.java" />
         <option value="$PROJECT_DIR$/src/ProccessingPanel.java" />
-        <option value="$PROJECT_DIR$/src/SettingsFrame.java" />
         <option value="$PROJECT_DIR$/src/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/DownloadsQueueFrame.java" />
-        <option value="$PROJECT_DIR$/src/DownloadPanel.java" />
+        <option value="$PROJECT_DIR$/src/QueuePanel.java" />
         <option value="$PROJECT_DIR$/src/ToolBarPanel.java" />
+        <option value="$PROJECT_DIR$/src/DownloadPanel.java" />
         <option value="$PROJECT_DIR$/src/Download.java" />
+        <option value="$PROJECT_DIR$/src/HTTPDownloadUtil.java" />
+        <option value="$PROJECT_DIR$/src/DownloadFile.java" />
+        <option value="$PROJECT_DIR$/src/SettingInformation.java" />
+        <option value="$PROJECT_DIR$/src/SettingsFrame.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="55" />
-    <option name="y" value="25" />
-    <option name="width" value="656" />
-    <option name="height" value="743" />
+    <option name="x" value="67" />
+    <option name="y" value="27" />
+    <option name="width" value="1299" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -219,6 +220,11 @@
             <path>
               <item name="JDM" type="b2602c69:ProjectViewProjectNode" />
               <item name="JDM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JDM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JDM" type="462c0819:PsiDirectoryNode" />
+              <item name="Saves" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JDM" type="b2602c69:ProjectViewProjectNode" />
@@ -250,7 +256,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SwingWorkerExample" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
@@ -317,7 +323,7 @@
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19553073" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20830008" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -327,14 +333,14 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32789558" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32952693" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39967373" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39967373" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.32952693" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32952693" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32952693" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32626426" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -388,13 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/NewDownloadFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LogoPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -409,25 +408,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DownloadPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="361" column="61" selection-start-line="361" selection-start-column="61" selection-end-line="361" selection-end-column="61" />
-          <folding>
-            <element signature="e#6993#8486#0" expanded="true" />
-            <element signature="e#8485#8486#0" expanded="true" />
-            <element signature="e#11748#11756#0" expanded="true" />
-            <element signature="e#12053#12063#0" expanded="true" />
-            <element signature="e#12217#12226#0" expanded="true" />
-            <element signature="e#12470#12480#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ProccessingPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        <state>
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -436,8 +419,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DownloadsQueueFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="329">
           <caret line="144" selection-start-line="144" selection-end-line="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/src.zip!/java/awt/AWTEventMulticaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="269" selection-start-line="269" selection-end-line="269" />
         </state>
       </provider>
     </entry>
@@ -448,48 +438,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainFrame.java">
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/src.zip!/javax/swing/SwingWorker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="128">
+          <caret line="326" column="25" selection-start-line="326" selection-start-column="25" selection-end-line="326" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SettingsFrame.java">
+    <entry file="file://$PROJECT_DIR$/Saves/setting.jdm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="261" column="5" selection-start-line="261" selection-start-column="5" selection-end-line="261" selection-end-column="5" />
+        <state>
+          <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DownloadPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1252">
+          <caret line="363" column="13" selection-start-line="363" selection-start-column="13" selection-end-line="363" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NewDownloadFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DownloadFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="49" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
           <folding>
-            <element signature="e#3859#4389#0" expanded="true" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4427#4638#0" expanded="true" />
-            <element signature="e#4637#4638#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SettingInformation.java">
+    <entry file="file://$PROJECT_DIR$/src/HTTPDownloadUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        <state relative-caret-position="-420">
+          <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
           <folding>
-            <element signature="e#482#483#0" expanded="true" />
-            <element signature="e#513#514#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2569#2570#0" expanded="true" />
+            <element signature="e#2608#2609#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ToolBarPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="291" column="47" selection-start-line="291" selection-start-column="47" selection-end-line="291" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/QueuePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="124" column="5" selection-start-line="124" selection-start-column="5" selection-end-line="124" selection-end-column="5" />
+        <state relative-caret-position="329">
+          <caret line="177" selection-start-line="177" selection-end-line="177" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -498,14 +500,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Download.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        <state relative-caret-position="300">
+          <caret line="167" column="11" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2435#2436#0" expanded="true" />
-            <element signature="e#2467#2468#0" expanded="true" />
-            <element signature="e#2807#2808#0" expanded="true" />
-            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="e#3103#3104#0" expanded="true" />
+            <element signature="e#3153#3154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SettingInformation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+            <element signature="e#853#854#0" expanded="true" />
+            <element signature="e#832#833#0" expanded="true" />
+            <element signature="e#866#867#0" expanded="true" />
+            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ToolBarPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SettingsFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
+          <folding>
+            <element signature="e#3859#4389#0" expanded="true" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4427#4638#0" expanded="true" />
+            <element signature="e#4637#4638#0" expanded="true" />
           </folding>
         </state>
       </provider>

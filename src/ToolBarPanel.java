@@ -180,9 +180,9 @@ public class ToolBarPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 System.out.println("remove download ...");
                 DownloadPanel.deleteFromDownloadList();
-                QueuePanel.deleteFromDownloadList();
+//                QueuePanel.deleteFromDownloadList();
                 MainFrame.updateDownloadPanel(1);
-                DownloadsQueueFrame.updateDownloadPanel();
+//                DownloadsQueueFrame.updateDownloadPanel();
               //  MainFrame.updateDownloadPanel(2);
             }
         });

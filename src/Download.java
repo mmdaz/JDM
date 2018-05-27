@@ -1,9 +1,11 @@
 import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Download implements Serializable {
+public class Download implements Serializable , PropertyChangeListener {
     private String name ;
     private String status ;
     private int size ;
@@ -22,8 +24,8 @@ public class Download implements Serializable {
         this.name = url ;
         this.status = "downloading..." ;
         this.finishedTime = " finish time" ;
-        Integer s = Integer.parseInt(url) ;
-        this.size = s ;
+      //  Integer s = Integer.parseInt(url) ;
+        this.size = 100  ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
         this.saveAdress = "s address" ;
         this.progressValue = 50;
@@ -124,9 +126,60 @@ public class Download implements Serializable {
         this.status = status;
     }
 
+    public void setProgressValue(int progressValue) {
+        this.progressValue = progressValue;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("progress")) {
+            int progress = (Integer) evt.getNewValue();
+            progressValue =progress ;
+        }
+    }
+
+    public void startToDownload () {
+
+        if (status.equals("downloading...")) {
+
+            if (url.equals("")) {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(), "Please enter download URL!",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+//            if (SettingInformation.savePath.equals("")) {
+//                JOptionPane.showMessageDialog(MainFrame.getInstance(),
+//                        "Please choose a directory save file!", "Error",
+//                        JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+
+
+            try {
+                progressValue = 0 ;
+
+                DownloadFile downloadFile = new DownloadFile(url , SettingInformation.savePath , this) ;
+                downloadFile.addPropertyChangeListener(this::propertyChange);
+         //       System.out.println("exe");
+                downloadFile.execute();
+
+            }
+            catch (Exception ex ) {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(),
+                        "Error executing upload task: " + ex.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+
+        }
+
+    }
+
 }
 
 

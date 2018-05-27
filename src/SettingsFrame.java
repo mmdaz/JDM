@@ -20,15 +20,26 @@ public class SettingsFrame extends JFrame  {
     private JRadioButton lookAndFill2 ;
     private JRadioButton defaultLook ;
     private SettingInformation settingInformation ;
+    private JTextArea filterTextArea ;
+    private String[] filterSites ;
 
 
 
     public SettingsFrame () {
 
+        JTabbedPane tabs = new JTabbedPane() ;
+        JPanel tabsPanel = new JPanel() ;
+        setLayout(new BorderLayout());
         settingInformation = loadSetiings() ;
-        savePath = settingInformation.getSavePath();
-        sameDownloadNumbers = settingInformation.getSameTimeDownloads() ;
-        setSize(500,400);
+        savePath = SettingInformation.getSavePath();
+        sameDownloadNumbers = SettingInformation.getSameTimeDownloads() ;
+        filterSites = SettingInformation.getFilterSites() ;
+        System.out.println(savePath);
+        System.out.println(sameDownloadNumbers);
+        for (int i = 0 ; i < filterSites.length ; i ++ ) {
+            filterTextArea.setText(filterTextArea.getText() + "/n" + filterSites[i]);
+        }
+        setSize(550,300);
         setTitle("Settings");
         // create and add JSlider for the numbers of downloads in same time
         JPanel downloadNumberPanel = new JPanel( new BorderLayout()) ;
@@ -38,9 +49,9 @@ public class SettingsFrame extends JFrame  {
         numberSelector.setPaintLabels(true);
         numberSelector.setMinorTickSpacing(1);
         numberSelector.setMajorTickSpacing(1);
-        numberSelector.setValue(settingInformation.getSameTimeDownloads());
-        downloadNumberPanel.add(downloadNumberLabel , BorderLayout.NORTH) ;
-        downloadNumberPanel.add(numberSelector , BorderLayout.SOUTH) ;
+        numberSelector.setValue(SettingInformation.getSameTimeDownloads());
+        downloadNumberPanel.add(downloadNumberLabel , BorderLayout.WEST) ;
+        downloadNumberPanel.add(numberSelector , BorderLayout.EAST) ;
         downloadNumberLabel.setPreferredSize( new Dimension(300,100));
         downloadNumberPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -61,7 +72,7 @@ public class SettingsFrame extends JFrame  {
         cancel.setBackground(Color.DARK_GRAY);
         buttonsPanel.add(saveChanges , BorderLayout.WEST) ;
         buttonsPanel.add(cancel , BorderLayout.EAST) ;
-        buttonsPanel.setPreferredSize( new Dimension(300,100));
+        buttonsPanel.setPreferredSize( new Dimension(300,60));
 
 
         // set look and fill chooser :
@@ -75,8 +86,8 @@ public class SettingsFrame extends JFrame  {
         JLabel setLAndF = new JLabel("<html><p style=\"text-align:center;\"> Select Look and Feel ...</p></html>") ;
         radioButtonsPanel.add(setLAndF ,BorderLayout.NORTH );
         radioButtonsPanel.add(lookAndFill1 ,BorderLayout.WEST);
-        radioButtonsPanel.add(lookAndFill2 , BorderLayout.EAST);
-        radioButtonsPanel.add(defaultLook, BorderLayout.CENTER) ;
+        radioButtonsPanel.add(lookAndFill2 , BorderLayout.CENTER);
+        radioButtonsPanel.add(defaultLook, BorderLayout.EAST) ;
         radioButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
 
@@ -86,9 +97,27 @@ public class SettingsFrame extends JFrame  {
         JPanel contentPain = new JPanel( new BorderLayout()) ;
         contentPain.add(downloadNumberPanel , BorderLayout.NORTH) ;
         contentPain.add(chooseSavePath , BorderLayout.CENTER) ;
-        contentPain.add(radioButtonsPanel ,BorderLayout.EAST);
-        contentPain.add(buttonsPanel , BorderLayout.SOUTH) ;
-        setContentPane(contentPain);
+        contentPain.add(radioButtonsPanel ,BorderLayout.SOUTH);
+       // contentPain.add(buttonsPanel , BorderLayout.SOUTH) ;
+        tabs.add("Download" , contentPain) ;
+
+
+        // create connection tab :
+
+        JPanel connectionPanel = new JPanel(new BorderLayout()) ;
+        filterTextArea = new JTextArea() ;
+        JLabel writeFilterSites = new JLabel("Write Filter Sites ...") ;
+        connectionPanel.add(writeFilterSites , BorderLayout.NORTH) ;
+        connectionPanel.add(filterTextArea , BorderLayout.CENTER) ;
+        tabs.add("Connection" , connectionPanel) ;
+
+
+
+
+
+        tabsPanel.add(tabs) ;
+        add(tabsPanel , BorderLayout.CENTER) ;
+        add(buttonsPanel , BorderLayout.SOUTH) ;
 
 
 
@@ -104,8 +133,8 @@ public class SettingsFrame extends JFrame  {
                 sameDownloadNumbers = numberSelector.getValue() ;
                 System.out.println("same download numbers : " + sameDownloadNumbers);
                 ToolBarPanel.setting.setEnabled(true);
-                settingInformation.setSameTimeDownloads(sameDownloadNumbers);
-                settingInformation.setSavePath(savePath);
+                SettingInformation.setSameTimeDownloads(sameDownloadNumbers);
+               SettingInformation.setSavePath(savePath);
                 saveSettings();
                 dispose();
             }
@@ -228,6 +257,10 @@ public class SettingsFrame extends JFrame  {
 
     private void saveSettings () {
 
+       // System.out.println(SettingInformation.getSameTimeDownloads());
+        filterSites = filterTextArea.getText().split("/n") ;
+        SettingInformation.setFilterSites(filterSites);
+
         try (FileOutputStream fs = new FileOutputStream("Saves/setting.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
             os.writeObject(settingInformation);
@@ -260,4 +293,5 @@ public class SettingsFrame extends JFrame  {
 
         return loadInformation ;
     }
+
 }

@@ -30,6 +30,12 @@ public class DownloadPanel extends JPanel implements Serializable {
         addCompletedDownload();
         addProgresssDownload();
 
+        for (Download download : downloadsList ) {
+
+            download.startToDownload();
+
+        }
+
         // all download panels added to this panel and this panel addedP to the scrollpane
         // and scroll pane added to the panel of this class :
 
@@ -56,6 +62,7 @@ public class DownloadPanel extends JPanel implements Serializable {
                 progressBar.setBounds(40, 40, 160, 30);
                 progressBar.setStringPainted(true);
                 progressBar.setValue(download.getProgressValue());
+//                MainFrame.updateDownloadPanel(1);
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
                 panel.add(progressBar, BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
@@ -348,9 +355,11 @@ public class DownloadPanel extends JPanel implements Serializable {
         ArrayList<Download> sortedByNameList = new ArrayList<Download>() ;
 
         for (String s : tempName) {
-            for (Download download : downloadsList) {
-                if (download.getName().equals(s)) {
-                    sortedByNameList.add(download) ;
+            if (downloadsList.size() != 0) {
+                for (Download download : downloadsList) {
+                    if (download.getName().equals(s)) {
+                        sortedByNameList.add(download);
+                    }
                 }
             }
         }
