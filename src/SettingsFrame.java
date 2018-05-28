@@ -12,16 +12,16 @@ public class SettingsFrame extends JFrame  {
 
     private JButton chooseSavePath ;
     private JFileChooser pathChooser ;
-    private String savePath ;
+    public static String savePath  = "/home/mmdni/Desktop" ;
     private JButton saveChanges ;
     private JButton cancel ;
-    private int sameDownloadNumbers ;
+    public static int sameDownloadNumbers ;
     private JRadioButton lookAndFill1 ;
     private JRadioButton lookAndFill2 ;
     private JRadioButton defaultLook ;
     private SettingInformation settingInformation ;
     private JTextArea filterTextArea ;
-    private String[] filterSites ;
+    public static String[] filterSites ;
 
 
 
@@ -30,14 +30,16 @@ public class SettingsFrame extends JFrame  {
         JTabbedPane tabs = new JTabbedPane() ;
         JPanel tabsPanel = new JPanel() ;
         setLayout(new BorderLayout());
+        settingInformation = new SettingInformation() ;
         settingInformation = loadSetiings() ;
-        savePath = SettingInformation.getSavePath();
-        sameDownloadNumbers = SettingInformation.getSameTimeDownloads() ;
-        filterSites = SettingInformation.getFilterSites() ;
-        System.out.println(savePath);
-        System.out.println(sameDownloadNumbers);
+        savePath = settingInformation.getSavePath();
+        sameDownloadNumbers = settingInformation.getSameTimeDownloads() ;
+        filterSites = settingInformation.getFilterSites() ;
+        filterTextArea = new JTextArea() ;
+//        System.out.println(savePath);
+//        System.out.println(sameDownloadNumbers);
         for (int i = 0 ; i < filterSites.length ; i ++ ) {
-            filterTextArea.setText(filterTextArea.getText() + "/n" + filterSites[i]);
+            filterTextArea.setText(filterTextArea.getText() +  filterSites[i]);
         }
         setSize(550,300);
         setTitle("Settings");
@@ -49,7 +51,7 @@ public class SettingsFrame extends JFrame  {
         numberSelector.setPaintLabels(true);
         numberSelector.setMinorTickSpacing(1);
         numberSelector.setMajorTickSpacing(1);
-        numberSelector.setValue(SettingInformation.getSameTimeDownloads());
+        numberSelector.setValue(settingInformation.getSameTimeDownloads());
         downloadNumberPanel.add(downloadNumberLabel , BorderLayout.WEST) ;
         downloadNumberPanel.add(numberSelector , BorderLayout.EAST) ;
         downloadNumberLabel.setPreferredSize( new Dimension(300,100));
@@ -105,23 +107,14 @@ public class SettingsFrame extends JFrame  {
         // create connection tab :
 
         JPanel connectionPanel = new JPanel(new BorderLayout()) ;
-        filterTextArea = new JTextArea() ;
-        JLabel writeFilterSites = new JLabel("Write Filter Sites ...") ;
+        JLabel writeFilterSites = new JLabel("<html>Write Filter Sites like the example format  ...<br> Example : www.hello.com ---> You should write hello </html>") ;
         connectionPanel.add(writeFilterSites , BorderLayout.NORTH) ;
         connectionPanel.add(filterTextArea , BorderLayout.CENTER) ;
         tabs.add("Connection" , connectionPanel) ;
 
-
-
-
-
         tabsPanel.add(tabs) ;
         add(tabsPanel , BorderLayout.CENTER) ;
         add(buttonsPanel , BorderLayout.SOUTH) ;
-
-
-
-
 
 
 
@@ -133,8 +126,8 @@ public class SettingsFrame extends JFrame  {
                 sameDownloadNumbers = numberSelector.getValue() ;
                 System.out.println("same download numbers : " + sameDownloadNumbers);
                 ToolBarPanel.setting.setEnabled(true);
-                SettingInformation.setSameTimeDownloads(sameDownloadNumbers);
-               SettingInformation.setSavePath(savePath);
+                settingInformation.setSameTimeDownloads(sameDownloadNumbers);
+                settingInformation.setSavePath(savePath);
                 saveSettings();
                 dispose();
             }
@@ -259,7 +252,7 @@ public class SettingsFrame extends JFrame  {
 
        // System.out.println(SettingInformation.getSameTimeDownloads());
         filterSites = filterTextArea.getText().split("/n") ;
-        SettingInformation.setFilterSites(filterSites);
+        settingInformation.setFilterSites(filterSites);
 
         try (FileOutputStream fs = new FileOutputStream("Saves/setting.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
@@ -273,7 +266,7 @@ public class SettingsFrame extends JFrame  {
 
     }
 
-    private SettingInformation loadSetiings () {
+    public static SettingInformation loadSetiings () {
 
 
         SettingInformation loadInformation = new SettingInformation() ;
@@ -294,4 +287,9 @@ public class SettingsFrame extends JFrame  {
         return loadInformation ;
     }
 
+    public static String[] getFilterSites() {
+
+        filterSites = loadSetiings().getFilterSites() ;
+        return filterSites;
+    }
 }

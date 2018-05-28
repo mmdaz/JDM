@@ -125,7 +125,7 @@ public class DownloadsQueueFrame extends JFrame {
 
     public static void saveQueue (QueuePanel queuePanel ) {
 
-        try (FileOutputStream fs = new FileOutputStream("queue.jdm")) {
+        try (FileOutputStream fs = new FileOutputStream("Saves/queue.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
             ArrayList<Download> downloadList = QueuePanel.getDownloadsList() ;
             os.writeObject(downloadList);
@@ -142,7 +142,7 @@ public class DownloadsQueueFrame extends JFrame {
 
         ArrayList<Download> downloadList = new ArrayList<Download>() ;
 
-        try (FileInputStream fs = new FileInputStream("queue.jdm")) {
+        try (FileInputStream fs = new FileInputStream("Saves/queue.jdm")) {
 
             ObjectInputStream os = new ObjectInputStream(fs);
 

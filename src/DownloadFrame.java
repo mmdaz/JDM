@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -69,7 +68,10 @@ public class DownloadFrame extends JFrame {
         cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                download.setStatus("canceled");
+                if (!download.getStatus().equals("completed")) {
+                    download.setStatus("canceled");
+                    download.setProgressValue(0);
+                }
                 MainFrame.updateDownloadPanel(3);
                 dispose();
             }
@@ -107,9 +109,7 @@ public class DownloadFrame extends JFrame {
                 download.getFinishedTime() + "<br>url : " +download.getUrl() +"</html>") ;
 
         contentPain.add(informationLabel , BorderLayout.NORTH) ;
-
         contentPain.add(progressBar , BorderLayout.CENTER) ;
-
         contentPain.revalidate();
         contentPain.repaint();
 

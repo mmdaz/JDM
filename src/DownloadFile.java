@@ -1,12 +1,12 @@
-import org.omg.CORBA.portable.InputStream;
+
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
-public class DownloadFile extends SwingWorker < Void , Void > {
+public class DownloadFile extends SwingWorker < String , Integer > {
 
     public static final int BUFFER_SIZE = 4096 ;
     private String downloadUrl ;
@@ -23,8 +23,15 @@ public class DownloadFile extends SwingWorker < Void , Void > {
 
 
     @Override
-    protected Void doInBackground() {
+    protected void process(List<Integer> chunks) {
 
+        System.out.println("processed");
+        MainFrame.refresh();
+    }
+
+    @Override
+    protected String doInBackground() {
+        System.out.println(download.getStatus());
         try {
             HTTPDownloadUtil util = new HTTPDownloadUtil() ;
             util.downloadFile(downloadUrl);
@@ -34,29 +41,32 @@ public class DownloadFile extends SwingWorker < Void , Void > {
             System.out.println("f" + util.getFileName());
             String saveFilePath = saveDirectory + File.separator + util.getFileName() ;
 
-            InputStream inputStream = (InputStream) util.getInputStream();
-            System.out.println("getinputstream");
-         //   FileInputStream inputStream = new FileInputStream(String.valueOf(util.getInputStream())) ;
+            BufferedInputStream inputStream = new BufferedInputStream(util.getInputStream()) ;
 
             // file operations :
 
             FileOutputStream outputStream = new FileOutputStream(saveFilePath) ;
+            download.setSaveAdress(saveFilePath);
             byte[] buffer = new byte[BUFFER_SIZE];
             int bytesRead = -1;
             long totalBytesRead = 0;
             int percentCompleted = 0;
             long fileSize = util.getContentLength();
             System.out.println(fileSize);
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
+            while ((bytesRead = inputStream.read(buffer)) > 0 ) {
+                if (Thread.interrupted())
+                    break;
                 outputStream.write(buffer, 0, bytesRead);
                 totalBytesRead += bytesRead;
-                percentCompleted = (int) (totalBytesRead * 100 / fileSize);
-
-                setProgress(percentCompleted);
+                percentCompleted = (int) (((totalBytesRead+0.0) / fileSize)*100);
                 download.setProgressValue(percentCompleted);
-                System.out.println("g"+percentCompleted);
+                publish(getProgress());
+              //  setProgress(percentCompleted);
+
+//                System.out.println("g"+percentCompleted);
             }
 
+            outputStream.flush();
             outputStream.close();
 
             util.disconnect();
@@ -70,16 +80,28 @@ public class DownloadFile extends SwingWorker < Void , Void > {
             setProgress(0);
             cancel(true);
         }
-        return null;
+        return "Ok";
 
 
     }
 
     protected void done() {
+        try {
+            get() ;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (CancellationException e) {
+            System.out.println();
+        }
+        System.out.println("done");
+        download.setStatus("completed");
         if (!isCancelled()) {
             JOptionPane.showMessageDialog(MainFrame.getInstance(),
                     "File has been downloaded successfully!", "Message",
                     JOptionPane.INFORMATION_MESSAGE);
         }
+        cancel(true) ;
     }
 }

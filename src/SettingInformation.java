@@ -2,9 +2,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class SettingInformation implements Serializable {
-    public static int sameTimeDownloads ;
-    public static String savePath ;
-    public static String[] filterSites ;
+    public  int sameTimeDownloads ;
+    public  String savePath ;
+    public  String[] filterSites ;
 
     public SettingInformation (String savePath , int sameTimeDownloads ) {
         this.sameTimeDownloads = sameTimeDownloads ;
@@ -16,27 +16,27 @@ public class SettingInformation implements Serializable {
     }
 
 
-    public static int getSameTimeDownloads() {
+    public  int getSameTimeDownloads() {
         return sameTimeDownloads;
     }
 
-    public static String getSavePath() {
+    public  String getSavePath() {
         return savePath;
     }
 
-    public static void setSameTimeDownloads(int sameTimeDownloads) {
-        SettingInformation.sameTimeDownloads = sameTimeDownloads;
+    public  void setSameTimeDownloads(int sameTimeDownloads) {
+        this.sameTimeDownloads = sameTimeDownloads;
     }
 
-    public static void setSavePath(String savePath) {
-        SettingInformation.savePath = savePath;
+    public  void setSavePath(String savePath) {
+        this.savePath = savePath;
     }
 
-    public static String[] getFilterSites() {
+    public  String[] getFilterSites() {
         return filterSites;
     }
 
-    public static void setFilterSites(String[] filterSites) {
-        SettingInformation.filterSites = filterSites;
+    public  void setFilterSites(String[] filterSites) {
+        this.filterSites = filterSites;
     }
 }

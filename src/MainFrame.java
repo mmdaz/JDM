@@ -88,8 +88,6 @@ public class MainFrame extends JFrame implements Serializable {
             updateDownloadPanel(1);
             mainFrame.setVisible(true);
 
-//            System.out.printf(proccessingPanel.getSearchDownloadList().get(0).getUrl());
-//         DownloadPanel.sortByName();
         }
 
 
@@ -104,8 +102,10 @@ public class MainFrame extends JFrame implements Serializable {
         saveDownloadList(downloadPanel);
         rightPanel.add(downloadPanel , BorderLayout.CENTER) ;
         System.out.println(downloadPanel.getDownloadsList().size());
-        contentPain.revalidate();
-        contentPain.repaint();
+        SwingUtilities.invokeLater(()->{
+            downloadPanel.revalidate();
+            downloadPanel.repaint();
+        });
 
     }
 
@@ -143,6 +143,16 @@ public class MainFrame extends JFrame implements Serializable {
 
 
         return downloadList ;
+
+    }
+
+    public static void refresh () {
+
+        downloadPanel.refreshProgressBar();
+        SwingUtilities.invokeLater(()->{
+            downloadPanel.revalidate();
+            downloadPanel.repaint();
+        });
 
     }
 

@@ -1,3 +1,5 @@
+import org.omg.CORBA.MARSHAL;
+
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,16 +21,18 @@ public class Download implements Serializable , PropertyChangeListener {
 
     public Download ( String url ) {
         this.url = url ;
-
-
         this.name = url ;
-        this.status = "downloading..." ;
+        if (DownloadPanel.downloadingFilesNumber() > SettingsFrame.sameDownloadNumbers ) {
+            this.status = "Paused" ;
+        }
+        else {
+            this.status = "downloading...";
+        }
         this.finishedTime = " finish time" ;
-      //  Integer s = Integer.parseInt(url) ;
-        this.size = 100  ;
+        this.size = 0  ;
         this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
         this.saveAdress = "s address" ;
-        this.progressValue = 50;
+        this.progressValue = 0;
 
 
     }
@@ -144,39 +148,56 @@ public class Download implements Serializable , PropertyChangeListener {
 
     public void startToDownload () {
 
-        if (status.equals("downloading...")) {
-
-            if (url.equals("")) {
-                JOptionPane.showMessageDialog(MainFrame.getInstance(), "Please enter download URL!",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-//            if (SettingInformation.savePath.equals("")) {
-//                JOptionPane.showMessageDialog(MainFrame.getInstance(),
-//                        "Please choose a directory save file!", "Error",
-//                        JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-
-
-            try {
-                progressValue = 0 ;
-
-                DownloadFile downloadFile = new DownloadFile(url , SettingInformation.savePath , this) ;
-                downloadFile.addPropertyChangeListener(this::propertyChange);
-         //       System.out.println("exe");
-                downloadFile.execute();
-
-            }
-            catch (Exception ex ) {
-                JOptionPane.showMessageDialog(MainFrame.getInstance(),
-                        "Error executing upload task: " + ex.getMessage(), "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-
-
+        if (isFilter()) {
+         JOptionPane.showMessageDialog(MainFrame.getInstance() , "This site is filter ." , "Filter!!!" , JOptionPane.ERROR_MESSAGE) ;
         }
+
+        else {
+            if (status.equals("downloading...")) {
+
+                if (url.equals("")) {
+                    JOptionPane.showMessageDialog(MainFrame.getInstance(), "Please enter download URL!",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (SettingsFrame.savePath.equals("")) {
+                    JOptionPane.showMessageDialog(MainFrame.getInstance(),
+                            "Please choose a directory save file!", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try {
+                    progressValue = 0;
+
+                    DownloadFile downloadFile = new DownloadFile(url, SettingsFrame.savePath, this);
+                    downloadFile.addPropertyChangeListener(this::propertyChange);
+                    downloadFile.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(MainFrame.getInstance(),
+                            "Error executing upload task: " + ex.getMessage(), "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+
+            }
+        }
+
+    }
+
+    private boolean isFilter () {
+
+        String[] filterSites = SettingsFrame.getFilterSites() ;
+
+        for ( int i = 0 ; i < filterSites.length ; i ++ ) {
+            if (url.matches(".*" +filterSites[i])) {
+                return true ;
+            }
+        }
+
+        return false ;
 
     }
 
