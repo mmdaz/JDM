@@ -22,6 +22,7 @@ public class SettingsFrame extends JFrame  {
     private SettingInformation settingInformation ;
     private JTextArea filterTextArea ;
     public static String[] filterSites ;
+    public static int lookAndFeelOption ;
 
 
 
@@ -35,6 +36,7 @@ public class SettingsFrame extends JFrame  {
         savePath = settingInformation.getSavePath();
         sameDownloadNumbers = settingInformation.getSameTimeDownloads() ;
         filterSites = settingInformation.getFilterSites() ;
+//        filterSites = new String[10] ;
         filterTextArea = new JTextArea() ;
 //        System.out.println(savePath);
 //        System.out.println(sameDownloadNumbers);
@@ -225,6 +227,11 @@ public class SettingsFrame extends JFrame  {
             }
         });
 
+
+
+
+        lookAndFeelOption = settingInformation.getLookAndFeelOption() ;
+
         setVisible(true);
 
     }
@@ -253,6 +260,14 @@ public class SettingsFrame extends JFrame  {
        // System.out.println(SettingInformation.getSameTimeDownloads());
         filterSites = filterTextArea.getText().split("/n") ;
         settingInformation.setFilterSites(filterSites);
+        if (defaultLook.isSelected()) {
+            settingInformation.setLookAndFeelOption(0);
+        }
+        else if (lookAndFill1.isSelected())
+            settingInformation.setLookAndFeelOption(1);
+        else if (lookAndFill2.isSelected())
+            settingInformation.setLookAndFeelOption(2);
+        System.out.println(settingInformation.getLookAndFeelOption());
 
         try (FileOutputStream fs = new FileOutputStream("Saves/setting.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
@@ -292,4 +307,6 @@ public class SettingsFrame extends JFrame  {
         filterSites = loadSetiings().getFilterSites() ;
         return filterSites;
     }
+
+
 }

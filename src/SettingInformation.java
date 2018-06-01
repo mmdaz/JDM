@@ -1,10 +1,10 @@
 import java.io.Serializable;
-import java.util.Set;
 
 public class SettingInformation implements Serializable {
     public  int sameTimeDownloads ;
     public  String savePath ;
     public  String[] filterSites ;
+    public int lookAndFeelOption ;
 
     public SettingInformation (String savePath , int sameTimeDownloads ) {
         this.sameTimeDownloads = sameTimeDownloads ;
@@ -38,5 +38,13 @@ public class SettingInformation implements Serializable {
 
     public  void setFilterSites(String[] filterSites) {
         this.filterSites = filterSites;
+    }
+
+    public int getLookAndFeelOption() {
+        return lookAndFeelOption;
+    }
+
+    public void setLookAndFeelOption(int lookAndFeelOption) {
+        this.lookAndFeelOption = lookAndFeelOption;
     }
 }

@@ -14,11 +14,8 @@ import java.util.List;
 public class DownloadsQueueFrame extends JFrame {
 
     public static JButton delete ;
-    public static JButton sortByDate ;
-    public static JButton sortByName ;
-    public static JButton sortBySize ;
     public static JButton startQueue ;
-    public static JButton puaseQueue ;
+    public static JButton pauseQueue ;
     public static JButton swapDownloads ;
     public static JPanel contentPain ;
     public static QueuePanel queuePanel ;
@@ -46,26 +43,20 @@ public class DownloadsQueueFrame extends JFrame {
 
 
             JPanel buttonsPanel = new JPanel(new GridLayout(2, 4, 5, 5));
-            delete = new JButton("Delete");
-            sortByDate = new JButton("Sort By Date ");
-            sortByName = new JButton("Sort By Name ");
-            sortBySize = new JButton("Sort By Size ");
             startQueue = new JButton("Start");
-            puaseQueue = new JButton("Puase");
+            pauseQueue = new JButton("Pause");
+            delete = new JButton("Delete");
             swapDownloads = new JButton("Swap") ;
             buttonsPanel.add(delete);
-            buttonsPanel.add(sortByDate);
-            buttonsPanel.add(sortByName);
-            buttonsPanel.add(sortBySize);
             buttonsPanel.add(startQueue) ;
-            buttonsPanel.add(puaseQueue) ;
+            buttonsPanel.add(pauseQueue) ;
             buttonsPanel.add(swapDownloads) ;
 
 
             mainPanel = new JPanel(new BorderLayout());
-            if (loadQueue().size() != 0) {
-                QueuePanel.setDownloadsList(loadQueue());
-            }
+//            if (loadQueue().size() != 0) {
+//                QueuePanel.setDownloadsList(loadQueue());
+//            }
             mainPanel.add(queuePanel, BorderLayout.CENTER);
             mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
             contentPain.add(mainPanel);
@@ -95,15 +86,20 @@ public class DownloadsQueueFrame extends JFrame {
                 }
             });
 
-
-            sortByDate.addMouseListener(new MouseAdapter() {
-
+            startQueue.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    QueuePanel.sortByCreateTime();
-                    downloadsQueueFrame.updateDownloadPanel();
+                    QueuePanel.startQueue();
                 }
             });
+
+            pauseQueue.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    QueuePanel.stopQueue();
+                }
+            });
+
 
         }
         return downloadsQueueFrame ;
@@ -114,7 +110,7 @@ public class DownloadsQueueFrame extends JFrame {
         mainPanel.remove(queuePanel) ;
         queuePanel = new QueuePanel() ;
         mainPanel.add(queuePanel, BorderLayout.CENTER) ;
-        saveQueue(queuePanel);
+       // saveQueue(queuePanel);
         contentPain.revalidate();
         contentPain.repaint();
         downloadsQueueFrame.revalidate();

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class DownloadFrame extends JFrame {
 
@@ -9,7 +10,7 @@ public class DownloadFrame extends JFrame {
     private JButton cancel ;
     private JButton resume ;
     private Download download ;
-    private JProgressBar progressBar ;
+    private   JProgressBar progressBar ;
     private JLabel informationLabel ;
     private JPanel contentPain ;
 
@@ -62,13 +63,31 @@ public class DownloadFrame extends JFrame {
         setContentPane(contentPain);
         setVisible(true);
 
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    refershProgressBar();
+                }
+            }
+        }
+
+        );
 
         // set actionlistener to buttons :
 
         cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
+
+
                 if (!download.getStatus().equals("completed")) {
+                    File file = new File(download.getSaveAdress()) ;
+                    if (file.delete()) {
+                        System.out.println("deleted ");
+                    }
+                    else
+                        System.out.println("not deleted");
                     download.setStatus("canceled");
                     download.setProgressValue(0);
                 }
@@ -117,6 +136,13 @@ public class DownloadFrame extends JFrame {
 
 
     }
+
+    private void refershProgressBar () {
+
+        progressBar.setValue(download.getProgressValue());
+
+    }
+
 
 
 }

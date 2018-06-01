@@ -89,6 +89,7 @@ public class NewDownloadFrame extends JFrame implements Serializable {
             public void mouseClicked(MouseEvent mouseEvent) {
                 downloadAddressString = downloadAddress.getText() ;
                 Download download = new Download(downloadAddressString) ;
+                download.setStatus("Paused");
                 QueuePanel.addDownload(download);
                 DownloadPanel.addDownload(download);
                 MainFrame.updateDownloadPanel(1);

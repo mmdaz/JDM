@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class MainFrame extends JFrame implements Serializable {
     public static ToolBarPanel toolBarPanel ;
@@ -19,7 +20,6 @@ public class MainFrame extends JFrame implements Serializable {
 
 
     private MainFrame () {
-
 
         if (SystemTray.isSupported()) {
 
@@ -82,9 +82,9 @@ public class MainFrame extends JFrame implements Serializable {
             rightPanel.add(downloadPanel, BorderLayout.CENTER);
             contentPain.add(leftPanel, BorderLayout.WEST);
             contentPain.add(rightPanel, BorderLayout.CENTER);
-            if (loadDownloadList().size() != 0) {
-                DownloadPanel.setDownloadsList(loadDownloadList());
-            }
+//            if (loadDownloadList().size() != 0) {
+//                DownloadPanel.setDownloadsList(loadDownloadList());
+//            }
             updateDownloadPanel(1);
             mainFrame.setVisible(true);
 
@@ -113,7 +113,7 @@ public class MainFrame extends JFrame implements Serializable {
 
         try (FileOutputStream fs = new FileOutputStream("Saves/list.jdm")) {
             ObjectOutputStream os = new ObjectOutputStream(fs) ;
-            ArrayList<Download> downloadList = downloadPanel.getDownloadsList() ;
+            Vector<Download> downloadList = downloadPanel.getDownloadsList() ;
             os.writeObject(downloadList);
         }
         catch (FileNotFoundException e) {
@@ -124,15 +124,15 @@ public class MainFrame extends JFrame implements Serializable {
     }
 
 
-    public static ArrayList<Download> loadDownloadList () {
+    public static Vector<Download> loadDownloadList () {
 
-        ArrayList<Download> downloadList = new ArrayList<Download>() ;
+        Vector<Download> downloadList = new Vector<Download>() ;
 
         try (FileInputStream fs = new FileInputStream("Saves/list.jdm")) {
 
             ObjectInputStream os = new ObjectInputStream(fs);
 
-             downloadList = (ArrayList<Download>) os.readObject();
+             downloadList = (Vector<Download>) os.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

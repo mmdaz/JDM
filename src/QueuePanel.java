@@ -162,6 +162,7 @@ public class QueuePanel extends JPanel {
         return counter ;
     }
 
+@Deprecated
     public void deleteDownload(JPanel panel) {
 
         downloadsList.remove(downloadPanels.indexOf(panel));
@@ -187,32 +188,6 @@ public class QueuePanel extends JPanel {
 
     }
 
-    public static void sortByCreateTime() {
-
-        int size = downloadsList.size();
-
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1 - i; j++) {
-                if (downloadsList.get(j + 1) == earlyDownload(downloadsList.get(j), downloadsList.get(j + 1))) {
-                    swapDownloadInArrayList(j, j + 1);
-                }
-            }
-
-        }
-
-    }
-
-    public static Download earlyDownload(Download download1, Download download2) {
-
-        Integer date1 = Integer.parseInt(download1.getCreatedTime());
-        Integer date2 = Integer.parseInt(download2.getCreatedTime());
-
-        if (date1 < date2) {
-            return download1;
-        }
-        return download2;
-
-    }
 
 
     public static void swapTwoDownloadInQueue () {
@@ -250,6 +225,41 @@ public class QueuePanel extends JPanel {
         downloadsList.set(i2, temp);
     }
 
+
+    public void downloadQueue () {
+
+        Iterator iterator = downloadsList.iterator() ;
+        Download download = new Download() ;
+
+        // TODo Iterate download list and handle queue downloading
+
+    }
+
+
+    public static void startQueue () {
+
+        for (Download download : downloadsList) {
+            if (download.getStatus().equals("Paused")){
+                download.setStatus("downloading...");
+                download.startToDownload();
+                break;
+            }
+        }
+
+    }
+
+    public static void stopQueue () {
+
+        for (Download download : downloadsList) {
+
+            if (download.getStatus().equals("downloading...")) {
+                download.setStatus("Paused");
+                break;
+            }
+
+        }
+
+    }
 
 
 }

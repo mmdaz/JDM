@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -27,11 +28,25 @@ public class HTTPDownloadUtil {
      *            HTTP URL of the file to be downloaded
      * @throws IOException
      */
-    public void downloadFile(String fileURL) throws IOException {
+    public void downloadFile(String fileURL , String saveDirectory ) throws IOException {
         URL url = new URL(fileURL);
         httpConn = (HttpURLConnection) url.openConnection();
         int responseCode = httpConn.getResponseCode();
 
+        String saveFilePath = saveDirectory + File.separator + getFileName() ;
+
+        File outPutFile = new File(saveFilePath) ;
+
+        if (outPutFile.exists()) {
+            System.out.println("salam exist");
+            Long downloadedSize = outPutFile.length()  ;
+            httpConn.setAllowUserInteraction(true);
+            httpConn.setRequestProperty("Range" , "bytes" + downloadedSize);
+            httpConn.connect();
+        }
+        else {
+            httpConn.connect();
+        }
         // always check HTTP response code first
         if (responseCode == HttpURLConnection.HTTP_OK) {
             System.out.println("ok");
@@ -71,6 +86,10 @@ public class HTTPDownloadUtil {
     public void disconnect() throws IOException {
         inputStream.close();
         httpConn.disconnect();
+    }
+
+    public HttpURLConnection getHttpConn() {
+        return httpConn;
     }
 
     public String getFileName() {

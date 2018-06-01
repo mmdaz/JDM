@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Vector;
 
 /**
  *  The DownloadPanel program is an application that simply
@@ -21,7 +22,7 @@ import java.util.Iterator;
 public class DownloadPanel extends JPanel implements Serializable {
 
     public static JProgressBar progressBar;
-    public static ArrayList<Download> downloadsList = new ArrayList<Download>();
+    public static Vector<Download> downloadsList = new Vector<Download>();
     public static ArrayList<JPanel> downloadPanels;
     private MainFrame mainFrame = MainFrame.getInstance();
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
@@ -219,11 +220,11 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
-    public static void setDownloadsList(ArrayList<Download> downloadsList) {
+    public static void setDownloadsList(Vector<Download> downloadsList) {
         DownloadPanel.downloadsList = downloadsList;
     }
 
-    public ArrayList<Download> getDownloadsList() {
+    public Vector<Download> getDownloadsList() {
         return downloadsList;
     }
 
@@ -281,7 +282,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 
 
     /**
-     * This
+     * This method iterates download lists ann delete selected downloads
      */
     public static void deleteFromDownloadList() {
 
@@ -297,7 +298,10 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
-
+    /**
+     * This method has a foreach to iterate download list and id a download is downloading add
+     * it to the progress downloads list .
+     */
 
     public static void addProgresssDownload () {
 
@@ -310,7 +314,10 @@ public class DownloadPanel extends JPanel implements Serializable {
         }
     }
 
-
+    /**
+     * This method has a foreach to iterate download list and id a download is completed add
+     *  it to the completed downloads list .
+     */
     public static void addCompletedDownload() {
         completedDownloadsList.clear();
         for (Download download : downloadsList) {
@@ -320,11 +327,15 @@ public class DownloadPanel extends JPanel implements Serializable {
         }
     }
 
+    /**
+     * This method add selected downloads to the queue .
+     */
     public static void addSelectedDownloadsToQueue () {
 
         for (Download download : downloadsList) {
 
             if (isSelected(downloadPanels.get(downloadsList.indexOf(download)))) {
+                download.setStatus("Paused");
                 QueuePanel.addDownload(download);
             }
 
@@ -332,7 +343,9 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
-
+    /**
+     * This method pause selected downloads .
+     */
 
     public static void pauseDownloads() {
 
@@ -346,6 +359,9 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
+    /**
+     * This method resume downloading of selected and  Paused downloads .
+     */
     public static void continueDownloads () {
         for (JPanel panel : downloadPanels ) {
             if (downloadingFilesNumber() == SettingsFrame.sameDownloadNumbers ) {
@@ -354,13 +370,18 @@ public class DownloadPanel extends JPanel implements Serializable {
             }
             if (isSelected(panel)) {
                 downloadsList.get(downloadPanels.indexOf(panel)).setStatus("downloading...");
+                downloadsList.get(downloadPanels.indexOf(panel)).startToDownload();
             }
+
 
         }
 
 
     }
 
+    /**
+     * This method cancel selected downloads .
+     */
     public static void cancelDownload () {
 
         for (JPanel panel : downloadPanels ) {
@@ -374,16 +395,20 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     }
 
-    public static ArrayList<Download> sortByName () {
+    /**
+     * This method sort downloads list by the name of downloads .
+     * @return an ArrayList os sorted downloads .
+     */
+    public static Vector<Download> sortByName () {
 
-        ArrayList<String> tempName = new ArrayList<String>() ;
+        Vector<String> tempName = new Vector<String>() ;
 
         for (Download download : downloadsList) {
             tempName.add(download.getName()) ;
         }
         Collections.sort(tempName , String.CASE_INSENSITIVE_ORDER);
 
-        ArrayList<Download> sortedByNameList = new ArrayList<Download>() ;
+        Vector<Download> sortedByNameList = new Vector<Download>() ;
 
         for (String s : tempName) {
             if (downloadsList.size() != 0) {
@@ -397,7 +422,11 @@ public class DownloadPanel extends JPanel implements Serializable {
         return sortedByNameList ;
     }
 
-    public static ArrayList<Download> sortBySize () {
+    /**
+     * This method sort downloads list by the size of downloads .
+     *@return an ArrayList os sorted downloads .
+     */
+    public static Vector<Download> sortBySize () {
 
         ArrayList<Integer> tempSize = new ArrayList<Integer>() ;
 
@@ -406,11 +435,11 @@ public class DownloadPanel extends JPanel implements Serializable {
         }
         Collections.sort(tempSize);
 
-        ArrayList<Download> sortedByNameList = new ArrayList<Download>() ;
+        Vector<Download> sortedByNameList = new Vector<Download>() ;
 
-        for (Integer s : tempSize) {
+        for (Integer integer : tempSize) {
             for (Download download : downloadsList) {
-                if (download.getSize() == s) {
+                if (download.getSize() == integer) {
                     sortedByNameList.add(download) ;
                 }
             }
@@ -418,7 +447,10 @@ public class DownloadPanel extends JPanel implements Serializable {
         return sortedByNameList ;
     }
 
-
+    /**
+     * This method count the in progress downloads .
+     * @return the number of in progress downloads .
+     */
     public static int downloadingFilesNumber () {
 
         int counter = 0 ;

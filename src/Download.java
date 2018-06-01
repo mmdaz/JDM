@@ -138,6 +138,8 @@ public class Download implements Serializable , PropertyChangeListener {
         this.url = url;
     }
 
+
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("progress")) {
@@ -147,6 +149,9 @@ public class Download implements Serializable , PropertyChangeListener {
     }
 
     public void startToDownload () {
+
+        System.out.println(url);
+        System.out.println(isFilter());
 
         if (isFilter()) {
          JOptionPane.showMessageDialog(MainFrame.getInstance() , "This site is filter ." , "Filter!!!" , JOptionPane.ERROR_MESSAGE) ;
@@ -169,7 +174,6 @@ public class Download implements Serializable , PropertyChangeListener {
                 }
 
                 try {
-                    progressValue = 0;
 
                     DownloadFile downloadFile = new DownloadFile(url, SettingsFrame.savePath, this);
                     downloadFile.addPropertyChangeListener(this::propertyChange);
@@ -191,9 +195,12 @@ public class Download implements Serializable , PropertyChangeListener {
 
         String[] filterSites = SettingsFrame.getFilterSites() ;
 
-        for ( int i = 0 ; i < filterSites.length ; i ++ ) {
-            if (url.matches(".*" +filterSites[i])) {
-                return true ;
+        for (String filterSite : filterSites) {
+//            System.out.println(filterSite);
+//            System.out.println(url);
+            if (url.matches(".*" + filterSite + ".*")) {
+                System.out.println("salam true");
+                return true;
             }
         }
 
