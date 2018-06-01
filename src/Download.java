@@ -1,4 +1,3 @@
-import org.omg.CORBA.MARSHAL;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -6,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.io.File;
 
 public class Download implements Serializable , PropertyChangeListener {
     private String name ;
@@ -16,6 +16,7 @@ public class Download implements Serializable , PropertyChangeListener {
     private String finishedTime ;
     private String url ;
     private int progressValue ;
+    private int speed ;
 
 
 
@@ -30,9 +31,10 @@ public class Download implements Serializable , PropertyChangeListener {
         }
         this.finishedTime = " finish time" ;
         this.size = 0  ;
-        this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()); ;
+        this.createdTime = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
         this.saveAdress = "s address" ;
         this.progressValue = 0;
+        this.speed = 0 ;
 
 
     }
@@ -75,6 +77,14 @@ public class Download implements Serializable , PropertyChangeListener {
 
         return progressValue ;
 
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public String getName() {
@@ -153,41 +163,45 @@ public class Download implements Serializable , PropertyChangeListener {
         System.out.println(url);
         System.out.println(isFilter());
 
-        if (isFilter()) {
-         JOptionPane.showMessageDialog(MainFrame.getInstance() , "This site is filter ." , "Filter!!!" , JOptionPane.ERROR_MESSAGE) ;
-        }
+        File file = new File(saveAdress) ;
 
-        else {
-            if (status.equals("downloading...")) {
+        if (!file.exists()) {
 
-                if (url.equals("")) {
-                    JOptionPane.showMessageDialog(MainFrame.getInstance(), "Please enter download URL!",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+            if (isFilter()) {
+                JOptionPane.showMessageDialog(MainFrame.getInstance(), "This site is filter .", "Filter!!!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (status.equals("downloading...")) {
+
+                    if (url.equals("")) {
+                        JOptionPane.showMessageDialog(MainFrame.getInstance(), "Please enter download URL!",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (SettingsFrame.savePath.equals("")) {
+                        JOptionPane.showMessageDialog(MainFrame.getInstance(),
+                                "Please choose a directory save file!", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    try {
+
+                        DownloadFile downloadFile = new DownloadFile(url, SettingsFrame.savePath, this);
+                        downloadFile.addPropertyChangeListener(this::propertyChange);
+                        downloadFile.execute();
+
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(MainFrame.getInstance(),
+                                "Error executing upload task: " + ex.getMessage(), "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+
+
                 }
-
-                if (SettingsFrame.savePath.equals("")) {
-                    JOptionPane.showMessageDialog(MainFrame.getInstance(),
-                            "Please choose a directory save file!", "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                try {
-
-                    DownloadFile downloadFile = new DownloadFile(url, SettingsFrame.savePath, this);
-                    downloadFile.addPropertyChangeListener(this::propertyChange);
-                    downloadFile.execute();
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(MainFrame.getInstance(),
-                            "Error executing upload task: " + ex.getMessage(), "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-
-
             }
         }
+
 
     }
 

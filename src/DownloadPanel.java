@@ -6,10 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Vector;
+import java.util.*;
 
 /**
  *  The DownloadPanel program is an application that simply
@@ -57,8 +54,8 @@ public class DownloadPanel extends JPanel implements Serializable {
 
             for (Download download : progressDownloadlist) {
 
-                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() + "</html>");
-                downloadInformationLabel.setPreferredSize(new Dimension(200, 65));
+                JLabel downloadInformationLabel = new JLabel("<html>file name : " + download.getName() + "<br/> url : " + download.getUrl() + "<br/>" + download.getStatus() +"    speed : "+download.getSpeed()+ "</html>");
+                downloadInformationLabel.setPreferredSize(new Dimension(200, 75));
                 downloadInformationLabel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
                 downloadInformationLabel.setFont(new Font("Aria", Font.ITALIC, 14));
                 JPanel panel = new JPanel(new BorderLayout());
@@ -369,14 +366,23 @@ public class DownloadPanel extends JPanel implements Serializable {
                 break;
             }
             if (isSelected(panel)) {
-                downloadsList.get(downloadPanels.indexOf(panel)).setStatus("downloading...");
-                downloadsList.get(downloadPanels.indexOf(panel)).startToDownload();
+                if (downloadsList.get(downloadPanels.indexOf(panel)).getStatus().equals("canceled")) {
+                    downloadsList.get(downloadPanels.indexOf(panel)).setStatus("downloading...");
+                    downloadsList.get(downloadPanels.indexOf(panel)).startToDownload();
+                }
+                else if (downloadsList.get(downloadPanels.indexOf(panel)).getStatus().equals("Paused")) {
+                    downloadsList.get(downloadPanels.indexOf(panel)).setStatus("downloading...");
+                }
+                else if (downloadsList.get(downloadPanels.indexOf(panel)).getStatus().equals("downloading..."))
+                    JOptionPane.showMessageDialog(MainFrame.getInstance() , "Download is now downloading ." , "Error" ,
+                            JOptionPane.WARNING_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(MainFrame.getInstance() , "Download is completed ." , "Error" ,
+                            JOptionPane.WARNING_MESSAGE);
+
             }
 
-
         }
-
-
     }
 
     /**
@@ -389,10 +395,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 
                 downloadsList.get(downloadPanels.indexOf(panel)).setStatus("canceled");
             }
-
         }
-
-
     }
 
     /**
@@ -426,25 +429,41 @@ public class DownloadPanel extends JPanel implements Serializable {
      * This method sort downloads list by the size of downloads .
      *@return an ArrayList os sorted downloads .
      */
-    public static Vector<Download> sortBySize () {
+    public static void sortBySize () {
 
-        ArrayList<Integer> tempSize = new ArrayList<Integer>() ;
+
+        TreeMap<String , Download> temp = new TreeMap<>() ;
+
+        for (Download download : downloadsList ) {
+
+            Integer size = download.getSize() ;
+
+            temp.put(size.toString() , download) ;
+        }
+
+        Iterator it = temp.values().iterator() ;
+        downloadsList.clear();
+        while (it.hasNext()) {
+            downloadsList.add((Download) it.next()) ;
+        }
+
+    }
+
+
+    public static void sortByTime () {
+
+        TreeMap<String , Download > temp = new TreeMap<>() ;
 
         for (Download download : downloadsList) {
-            tempSize.add(download.getSize()) ;
+            temp.put(download.getCreatedTime() , download) ;
         }
-        Collections.sort(tempSize);
 
-        Vector<Download> sortedByNameList = new Vector<Download>() ;
-
-        for (Integer integer : tempSize) {
-            for (Download download : downloadsList) {
-                if (download.getSize() == integer) {
-                    sortedByNameList.add(download) ;
-                }
-            }
+        Iterator it = temp.values().iterator() ;
+        downloadsList.clear();
+        while (it.hasNext()) {
+            downloadsList.add((Download) it.next()) ;
         }
-        return sortedByNameList ;
+
     }
 
     /**

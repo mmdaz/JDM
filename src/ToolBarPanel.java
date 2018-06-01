@@ -288,7 +288,7 @@ public class ToolBarPanel extends JPanel {
         sortBySize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DownloadPanel.setDownloadsList(DownloadPanel.sortBySize());
+               DownloadPanel.sortBySize();
                 MainFrame.updateDownloadPanel(1);
             }
         });
@@ -329,13 +329,13 @@ public class ToolBarPanel extends JPanel {
 
     private void getZip () {
 
-        String[] saveFiles = {"queue.jdm" , "list.jdm"} ;
+        String[] saveFiles = {"Saves/queue.jdm" , "Saves/list.jdm" , "Saves/setting.jdm"} ;
         String zipFile = "archive.zip" ;
         try {
             byte[] buffer = new byte[2048] ;
             FileOutputStream fileOutputStream = new FileOutputStream(zipFile) ;
             ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream) ;
-            for (int i = 0 ; i < saveFiles.length ; i++ ) {
+            for ( int i = 0 ; i < saveFiles.length ; i++ ) {
                 File saveFile = new File(saveFiles[i]) ;
                 FileInputStream fileInputStream = new FileInputStream(saveFile) ;
                 zipOutputStream.putNextEntry( new ZipEntry(saveFile.getName()));

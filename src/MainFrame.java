@@ -1,8 +1,7 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -66,7 +65,7 @@ public class MainFrame extends JFrame implements Serializable {
             downloadPanel = new DownloadPanel(1);
           //  downloadPanel.setDownloadsList(readDownloadListFromFile());
             mainFrame.setContentPane(contentPain);
-            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             mainFrame.setSize(800, 500);
             mainFrame.setLocation(100, 100);
             // downloadPanel = new DownloadPanel() ;
@@ -82,11 +81,19 @@ public class MainFrame extends JFrame implements Serializable {
             rightPanel.add(downloadPanel, BorderLayout.CENTER);
             contentPain.add(leftPanel, BorderLayout.WEST);
             contentPain.add(rightPanel, BorderLayout.CENTER);
-//            if (loadDownloadList().size() != 0) {
-//                DownloadPanel.setDownloadsList(loadDownloadList());
-//            }
+            if (loadDownloadList().size() != 0) {
+                DownloadPanel.setDownloadsList(loadDownloadList());
+            }
             updateDownloadPanel(1);
             mainFrame.setVisible(true);
+
+            mainFrame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                   systemTray();
+                   e.getWindow().dispose();
+                }
+            });
 
         }
 
@@ -155,5 +162,49 @@ public class MainFrame extends JFrame implements Serializable {
         });
 
     }
+
+    public static void systemTray () {
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
+            PopupMenu jdm = new PopupMenu();
+            MenuItem item = new MenuItem("A MenuItem");
+            jdm.add(item);
+            Image image = Toolkit.getDefaultToolkit().getImage("Icons/icon3.png");
+            TrayIcon trayIcon = new TrayIcon(image, "Java Download Manager", jdm);
+            trayIcon.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    tray.remove(trayIcon);
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    tray.remove(trayIcon);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    tray.remove(trayIcon);
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+            try {
+                tray.add(trayIcon);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
     }

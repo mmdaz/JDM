@@ -16,6 +16,7 @@ public class DownloadsQueueFrame extends JFrame {
     public static JButton delete ;
     public static JButton startQueue ;
     public static JButton pauseQueue ;
+    public static JButton resumeQueue ;
     public static JButton swapDownloads ;
     public static JPanel contentPain ;
     public static QueuePanel queuePanel ;
@@ -23,7 +24,7 @@ public class DownloadsQueueFrame extends JFrame {
     public static DownloadsQueueFrame downloadsQueueFrame ;
 
 
-    private DownloadsQueueFrame () {
+    private DownloadsQueueFrame() {
 
     }
 
@@ -47,9 +48,11 @@ public class DownloadsQueueFrame extends JFrame {
             pauseQueue = new JButton("Pause");
             delete = new JButton("Delete");
             swapDownloads = new JButton("Swap") ;
+            resumeQueue = new JButton("Resume") ;
             buttonsPanel.add(delete);
             buttonsPanel.add(startQueue) ;
             buttonsPanel.add(pauseQueue) ;
+            buttonsPanel.add(resumeQueue);
             buttonsPanel.add(swapDownloads) ;
 
 
@@ -100,6 +103,13 @@ public class DownloadsQueueFrame extends JFrame {
                 }
             });
 
+
+            resumeQueue.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    QueuePanel.startQueue();
+                }
+            });
 
         }
         return downloadsQueueFrame ;
@@ -155,6 +165,7 @@ public class DownloadsQueueFrame extends JFrame {
         return downloadList ;
 
     }
+
 
 
 }

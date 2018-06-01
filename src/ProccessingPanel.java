@@ -57,7 +57,7 @@ public class ProccessingPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 DownloadsQueueFrame.downloadsQueueFrame = null ;
-                DownloadsQueueFrame downloadsQueueFrame = DownloadsQueueFrame.getInstance() ;
+                DownloadsQueueFrame queueFrame =  DownloadsQueueFrame.getInstance() ;
             }
         });
 

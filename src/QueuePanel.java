@@ -226,15 +226,6 @@ public class QueuePanel extends JPanel {
     }
 
 
-    public void downloadQueue () {
-
-        Iterator iterator = downloadsList.iterator() ;
-        Download download = new Download() ;
-
-        // TODo Iterate download list and handle queue downloading
-
-    }
-
 
     public static void startQueue () {
 
@@ -260,6 +251,19 @@ public class QueuePanel extends JPanel {
         }
 
     }
+
+    public static boolean inQueue (Download download) {
+
+        for (Download download1 : downloadsList) {
+            if (download1.getUrl().equals(download.getUrl()))
+                return true ;
+
+        }
+
+        return false;
+
+    }
+
 
 
 }

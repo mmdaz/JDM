@@ -1,6 +1,8 @@
 
 import javax.swing.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -11,6 +13,10 @@ public class DownloadFile extends SwingWorker < String , Integer > {
     private String downloadUrl ;
     private String saveDirectory ;
     private Download download ;
+    private Long startTime ;
+    private Long finishTime ;
+    private int bytesRead ;
+
 
     public DownloadFile ( String downloadUrl , String saveDirectory , Download download ) {
 
@@ -24,9 +30,12 @@ public class DownloadFile extends SwingWorker < String , Integer > {
     @Override
     protected void process(List<Integer> chunks) {
 
+        double time = ( finishTime - startTime ) / Math.pow(10,9) ;
+        double speed = bytesRead / Math.pow(10,3) / time ;
+        download.setSpeed((int) speed);
         System.out.println("processed");
+
         MainFrame.refresh();
-       // DownloadFrame.refershProgressBar();
     }
 
     @Override
@@ -55,7 +64,7 @@ public class DownloadFile extends SwingWorker < String , Integer > {
 
             download.setSaveAdress(saveFilePath) ;
             byte[] buffer = new byte[BUFFER_SIZE] ;
-            int bytesRead = -1 ;
+            bytesRead = -1 ;
             long totalBytesRead = 0 ;
             int percentCompleted = 0 ;
             long fileSize = util.getContentLength();
@@ -64,8 +73,10 @@ public class DownloadFile extends SwingWorker < String , Integer > {
                 if (Thread.interrupted())
                     break ;
                 if (download.getStatus().equals("downloading...")) {
+                    startTime = System.nanoTime() ;
                     outputStream.write(buffer, 0, bytesRead) ;
                     totalBytesRead += bytesRead ;
+                    finishTime = System.nanoTime() ;
                     percentCompleted = (int) (((totalBytesRead + 0.0) / fileSize) * 100);
                     download.setProgressValue(percentCompleted);
                     publish(getProgress());
@@ -123,7 +134,16 @@ public class DownloadFile extends SwingWorker < String , Integer > {
         }
         else {
             download.setStatus("completed");
+            download.setProgressValue(100);
+            download.setFinishedTime(new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
         }
+
+        if (QueuePanel.inQueue(download)) {
+            System.out.println("in Queue");
+            QueuePanel.startQueue();
+            MainFrame.updateDownloadPanel(1);
+        }
+
         System.out.println("done");
 
         if (download.getStatus().equals("completed")) {

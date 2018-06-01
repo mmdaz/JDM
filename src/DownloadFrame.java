@@ -10,7 +10,6 @@ public class DownloadFrame extends JFrame {
     private JButton cancel ;
     private JButton resume ;
     private Download download ;
-    private   JProgressBar progressBar ;
     private JLabel informationLabel ;
     private JPanel contentPain ;
 
@@ -30,10 +29,7 @@ public class DownloadFrame extends JFrame {
 
         // progressBar :
 
-        progressBar = new JProgressBar() ;
-        progressBar.setBounds(40,40,160,30);
-        progressBar.setStringPainted(true);
-        progressBar.setValue(download.getProgressValue()) ;
+
 
 
 
@@ -54,8 +50,7 @@ public class DownloadFrame extends JFrame {
         buttonsPanel.add(emptyPanel , BorderLayout.SOUTH) ;
 
 
-        contentPain.add(informationLabel , BorderLayout.NORTH) ;
-        contentPain.add(progressBar , BorderLayout.CENTER) ;
+        contentPain.add(informationLabel , BorderLayout.CENTER) ;
         contentPain.add(buttonsPanel , BorderLayout.SOUTH) ;
 
 
@@ -63,16 +58,6 @@ public class DownloadFrame extends JFrame {
         setContentPane(contentPain);
         setVisible(true);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    refershProgressBar();
-                }
-            }
-        }
-
-        );
 
         // set actionlistener to buttons :
 
@@ -127,8 +112,7 @@ public class DownloadFrame extends JFrame {
                 "\n<p>size</p> : "+download.getSize() + "<br>created Time : "+download.getCreatedTime() + "<br>finished time : " +
                 download.getFinishedTime() + "<br>url : " +download.getUrl() +"</html>") ;
 
-        contentPain.add(informationLabel , BorderLayout.NORTH) ;
-        contentPain.add(progressBar , BorderLayout.CENTER) ;
+        contentPain.add(informationLabel , BorderLayout.CENTER) ;
         contentPain.revalidate();
         contentPain.repaint();
 
@@ -137,11 +121,7 @@ public class DownloadFrame extends JFrame {
 
     }
 
-    private void refershProgressBar () {
 
-        progressBar.setValue(download.getProgressValue());
-
-    }
 
 
 
