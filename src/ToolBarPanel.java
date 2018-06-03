@@ -212,7 +212,8 @@ public class ToolBarPanel extends JPanel {
         settingItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                SettingsFrame settingsFrame = new SettingsFrame() ;
+                Run.settingsFrame.setVisible(true);
+                setting.setEnabled(false);
             }
         });
 
@@ -245,8 +246,11 @@ public class ToolBarPanel extends JPanel {
 
         cancelDownloadItem.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("cancel download ...");
+            public void actionPerformed(ActionEvent actionEvent)
+            {
+                DownloadPanel.cancelDownload();
+                MainFrame.updateDownloadPanel(1);
+                System.out.println("cancel download ... ");
             }
         });
 
