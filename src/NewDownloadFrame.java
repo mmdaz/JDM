@@ -6,6 +6,14 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.Serializable;
 
+/**
+ * The NewDownload program is an application is simply
+ * is a frame that new download is create from it .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ */
 public class NewDownloadFrame extends JFrame implements Serializable {
 
     private JButton choosePath ;
@@ -93,6 +101,7 @@ public class NewDownloadFrame extends JFrame implements Serializable {
                 QueuePanel.addDownload(download);
                 DownloadPanel.addDownload(download);
                 MainFrame.updateDownloadPanel(1);
+                DownloadsQueueFrame.updateDownloadPanel();
                 dispose();
             }
         });

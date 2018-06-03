@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 /**
  * A utility that downloads a file from a URL.
@@ -28,11 +29,13 @@ public class HTTPDownloadUtil {
      *            HTTP URL of the file to be downloaded
      * @throws IOException
      */
-    public void downloadFile(String fileURL , String saveDirectory ) throws IOException {
+    public void downloadFile(String fileURL , String saveDirectory ) throws IOException , UnknownHostException {
         URL url = new URL(fileURL);
         httpConn = (HttpURLConnection) url.openConnection();
-        int responseCode = httpConn.getResponseCode();
 
+        System.out.println("LLL");
+        int responseCode = httpConn.getResponseCode();
+        System.out.println("kkksad");
         String saveFilePath = saveDirectory + File.separator + getFileName() ;
 
         File outPutFile = new File(saveFilePath) ;

@@ -8,6 +8,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The ProcessingPanel program is an application that simply
+ * is a panel that contain some buttons and search of the JDM .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ */
 
 public class ProccessingPanel extends JPanel {
 
@@ -56,8 +64,7 @@ public class ProccessingPanel extends JPanel {
         queueButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                DownloadsQueueFrame.downloadsQueueFrame = null ;
-                DownloadsQueueFrame queueFrame =  DownloadsQueueFrame.getInstance() ;
+               Run.downloadsQueueFrame.setVisible(true);
             }
         });
 
@@ -123,6 +130,9 @@ public class ProccessingPanel extends JPanel {
 
     }
 
+    /**
+     * The Method that search in downloads .
+     */
 
     public void search () {
 

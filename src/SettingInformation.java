@@ -1,5 +1,15 @@
 import java.io.Serializable;
 
+/**
+ * The SettingInformation program is an application that simply
+ * keep setting information for save them .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ */
+
+
 public class SettingInformation implements Serializable {
     public  int sameTimeDownloads ;
     public  String savePath ;

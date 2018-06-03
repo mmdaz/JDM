@@ -5,12 +5,22 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * The QueuePanel program is an application that simply
+ * is a panel that contain download panels and information .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ *
+ */
 public class QueuePanel extends JPanel {
 
     private JProgressBar progressBar;
     public static ArrayList<Download> downloadsList = new ArrayList<Download>();
     public static ArrayList<JPanel> downloadPanels;
     private DownloadsQueueFrame downloadsQueueFrame = DownloadsQueueFrame.getInstance() ;
+    public static ArrayList<JProgressBar> downloadsProgressBar ;
 
 
     public QueuePanel() {
@@ -18,10 +28,20 @@ public class QueuePanel extends JPanel {
         downloadPanels = new ArrayList<JPanel>();
         // create the progressbar :
 
-        progressBar = new JProgressBar(0, 100);
-        progressBar.setBounds(40, 40, 160, 30);
-        progressBar.setValue(50);
-        progressBar.setStringPainted(true);
+
+        downloadsProgressBar = new ArrayList<JProgressBar>()  ;
+
+        for (Download download : downloadsList) {
+
+            progressBar = new JProgressBar() ;
+            progressBar.setBounds(40, 40, 160, 30);
+            progressBar.setStringPainted(true);
+            int progressValue = download.getProgressValue();
+//                System.out.println("prog"+progressValue);
+            progressBar.setValue(progressValue);
+            downloadsProgressBar.add(progressBar);
+
+        }
 
 
         // all download panels added to this panel and this panel addedP to the scrollpane
@@ -47,7 +67,7 @@ public class QueuePanel extends JPanel {
             progressBar.setStringPainted(true);
             progressBar.setValue(download.getProgressValue());
             panel.add(downloadInformationLabel, BorderLayout.CENTER);
-            panel.add(progressBar, BorderLayout.SOUTH);
+            panel.add(downloadsProgressBar.get(downloadsList.indexOf(download)), BorderLayout.SOUTH);
             panel.setBorder(BorderFactory.createCompoundBorder());
             downloadPanels.add(panel);
         }
@@ -134,7 +154,11 @@ public class QueuePanel extends JPanel {
         panel.setBackground(Color.DARK_GRAY);
     }
 
-
+    /**
+     * The Method that check that a panel is selected or not .
+     * @param panel
+     * @return true if a panel is selected and false if is not .
+     */
 
     public static boolean isSelected(JPanel panel) {
         if (panel.getBackground().equals(Color.DARK_GRAY)) {
@@ -143,7 +167,10 @@ public class QueuePanel extends JPanel {
             return false;
     }
 
-
+    /**
+     * The Method that unselect the panel .
+     * @param panel
+     */
 
     public void unselectPanel(JPanel panel) {
         panel.setBackground(new Color(214, 217, 223));
@@ -172,7 +199,9 @@ public class QueuePanel extends JPanel {
         downloadsQueueFrame.repaint();
     }
 
-
+    /**
+     * The Method that iterate the download list and delete selected downloads .
+     */
 
     public static void deleteFromDownloadList() {
 
@@ -188,7 +217,9 @@ public class QueuePanel extends JPanel {
 
     }
 
-
+    /**
+     * The Method that swap 2 downloads that are selected .
+     */
 
     public static void swapTwoDownloadInQueue () {
 
@@ -217,6 +248,11 @@ public class QueuePanel extends JPanel {
 
     }
 
+    /**
+     * The Method that swap 2 download in download list .
+     * @param i1
+     * @param i2
+     */
 
     public static void swapDownloadInArrayList(int i1, int i2) {
 
@@ -264,6 +300,11 @@ public class QueuePanel extends JPanel {
 
     }
 
+    public void refreshProgressBar () {
+        for (Download download : downloadsList) {
+            downloadsProgressBar.get(downloadsList.indexOf(download)).setValue(download.getProgressValue());
+        }
+    }
 
 
 }

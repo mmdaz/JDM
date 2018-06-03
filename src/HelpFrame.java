@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The HelpFrame program is an application that simply
+ *  is a frame that have about and help of the JDM .
+ *
+ */
 public class HelpFrame extends JFrame {
 
 

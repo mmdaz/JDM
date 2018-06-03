@@ -3,22 +3,29 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.util.Set;
 
 public class Run {
+    public static SettingsFrame settingsFrame;
+    public static DownloadsQueueFrame downloadsQueueFrame;
+
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
 
-     //   UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        //   UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
 //        System.out.println(SettingsFrame.loadSetiings().getLookAndFeelOption());
 
-        if ( SettingsFrame.loadSetiings().getLookAndFeelOption() == 0 )
+        if (SettingsFrame.loadSetiings().getLookAndFeelOption() == 0)
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        else if (SettingsFrame.loadSetiings().getLookAndFeelOption() == 1 )
+        else if (SettingsFrame.loadSetiings().getLookAndFeelOption() == 1)
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-        else if (SettingsFrame.loadSetiings().getLookAndFeelOption() == 2 )
+        else if (SettingsFrame.loadSetiings().getLookAndFeelOption() == 2)
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 
 
-       MainFrame mainFrame = MainFrame.getInstance() ;
-
+        MainFrame mainFrame = MainFrame.getInstance();
+        settingsFrame = new SettingsFrame();
+        settingsFrame.setVisible(false);
+        downloadsQueueFrame = DownloadsQueueFrame.getInstance();
+        downloadsQueueFrame.setVisible(false);
 
     }
-    }
+
+}

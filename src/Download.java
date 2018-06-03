@@ -7,6 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.io.File;
 
+/**
+ * The download program is an application that simply
+ *  keep download information and give them to the GUI .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since 2018 spring
+ */
 public class Download implements Serializable , PropertyChangeListener {
     private String name ;
     private String status ;
@@ -73,6 +81,10 @@ public class Download implements Serializable , PropertyChangeListener {
 
     }
 
+    /**
+     * The method that get progressValue .
+     * @return progressValue .
+     */
     public int getProgressValue () {
 
         return progressValue ;
@@ -158,6 +170,9 @@ public class Download implements Serializable , PropertyChangeListener {
         }
     }
 
+    /**
+     * The Method that start download and check some thing to be correct for download .
+     */
     public void startToDownload () {
 
         System.out.println(url);
@@ -205,6 +220,10 @@ public class Download implements Serializable , PropertyChangeListener {
 
     }
 
+    /**
+     * The method that checks the url that it is filter or not .
+     * @return true if the url is filter and false if it is not filter
+     */
     private boolean isFilter () {
 
         String[] filterSites = SettingsFrame.getFilterSites() ;

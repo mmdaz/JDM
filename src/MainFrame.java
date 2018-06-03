@@ -3,9 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Vector;
 
+/**
+ * The MainFrame program is an application that simply
+ * is main frame of the JDM .
+ */
 public class MainFrame extends JFrame implements Serializable {
     public static ToolBarPanel toolBarPanel ;
     public static DownloadPanel downloadPanel ;
@@ -54,6 +57,10 @@ public class MainFrame extends JFrame implements Serializable {
         }
     }
 
+    /**
+     * This class is singleton and this method get a instance of the class .
+     * @return the instance of the main frame .
+     */
     public static  MainFrame getInstance () {
 
 
@@ -65,7 +72,7 @@ public class MainFrame extends JFrame implements Serializable {
             downloadPanel = new DownloadPanel(1);
           //  downloadPanel.setDownloadsList(readDownloadListFromFile());
             mainFrame.setContentPane(contentPain);
-            mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            mainFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             mainFrame.setSize(800, 500);
             mainFrame.setLocation(100, 100);
             // downloadPanel = new DownloadPanel() ;
@@ -101,7 +108,10 @@ public class MainFrame extends JFrame implements Serializable {
         return mainFrame ;
     }
 
-
+    /**
+     * The Method that update main frame for add and remove and so an .
+     * @param conditionNumber
+     */
     public static void updateDownloadPanel (int conditionNumber ) {
 
         rightPanel.remove(downloadPanel);
@@ -116,6 +126,10 @@ public class MainFrame extends JFrame implements Serializable {
 
     }
 
+    /**
+     * The Method that save download list in a file .
+     * @param downloadPanel
+     */
     public static void saveDownloadList (DownloadPanel downloadPanel ) {
 
         try (FileOutputStream fs = new FileOutputStream("Saves/list.jdm")) {
@@ -130,7 +144,10 @@ public class MainFrame extends JFrame implements Serializable {
         }
     }
 
-
+    /**
+     * The Method that load the download list in from the file .
+     * @return
+     */
     public static Vector<Download> loadDownloadList () {
 
         Vector<Download> downloadList = new Vector<Download>() ;
@@ -153,16 +170,20 @@ public class MainFrame extends JFrame implements Serializable {
 
     }
 
+    /**
+     * The Method that update the progress bar in downloading time .
+     */
     public static void refresh () {
 
         downloadPanel.refreshProgressBar();
-        SwingUtilities.invokeLater(()->{
-            downloadPanel.revalidate();
-            downloadPanel.repaint();
-        });
+        downloadPanel.revalidate();
+        downloadPanel.repaint();
 
     }
 
+    /**
+     * The method that handle the sysytem tray but does not work :((
+     */
     public static void systemTray () {
         if (SystemTray.isSupported()) {
             SystemTray tray = SystemTray.getSystemTray();

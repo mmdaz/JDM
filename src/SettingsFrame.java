@@ -7,6 +7,15 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * The SettingsFrame program is an application that simply
+ * is a frame that handle the settings of JDM : filter sites  ,
+ * same time downloads limit , so on .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ */
 
 public class SettingsFrame extends JFrame  {
 
@@ -27,7 +36,7 @@ public class SettingsFrame extends JFrame  {
 
 
     public SettingsFrame () {
-
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         JTabbedPane tabs = new JTabbedPane() ;
         JPanel tabsPanel = new JPanel() ;
         setLayout(new BorderLayout());
@@ -232,7 +241,7 @@ public class SettingsFrame extends JFrame  {
 
         lookAndFeelOption = settingInformation.getLookAndFeelOption() ;
 
-        setVisible(true);
+//        setVisible(true);
 
     }
 
@@ -307,6 +316,8 @@ public class SettingsFrame extends JFrame  {
         filterSites = loadSetiings().getFilterSites() ;
         return filterSites;
     }
+
+
 
 
 }

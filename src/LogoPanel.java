@@ -5,6 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The LogoPanel program is an application that simply
+ * is a panel that contain logo of the JDM .
+ */
 public class LogoPanel extends JPanel {
 
     public LogoPanel () {

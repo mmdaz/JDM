@@ -3,9 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -24,6 +22,7 @@ public class DownloadPanel extends JPanel implements Serializable {
     private MainFrame mainFrame = MainFrame.getInstance();
     public static ArrayList<Download> completedDownloadsList = new ArrayList<Download>();
     public static ArrayList<Download> progressDownloadlist = new ArrayList<Download>() ;
+    public static ArrayList<JProgressBar> downloadsProgressBar ;
 
 
     public DownloadPanel( int coditionNumber ) {
@@ -45,6 +44,20 @@ public class DownloadPanel extends JPanel implements Serializable {
         mainPanel.setLayout(gridLayout);
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        downloadsProgressBar = new ArrayList<JProgressBar>() ;
+
+        for (Download download : downloadsList) {
+
+            progressBar = new JProgressBar() ;
+            progressBar.setBounds(40, 40, 160, 30);
+            progressBar.setStringPainted(true);
+            int progressValue = download.getProgressValue();
+//                System.out.println("prog"+progressValue);
+            progressBar.setValue(progressValue);
+            downloadsProgressBar.add(progressBar);
+
+
+        }
 
 
         // create jlabel of each download panel for show  information of download :
@@ -66,7 +79,7 @@ public class DownloadPanel extends JPanel implements Serializable {
 //                System.out.println("prog"+progressValue);
                 progressBar.setValue(progressValue);
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(progressBar, BorderLayout.SOUTH);
+                panel.add(downloadsProgressBar.get(downloadsList.indexOf(download)), BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -86,7 +99,7 @@ public class DownloadPanel extends JPanel implements Serializable {
                 progressBar.setStringPainted(true);
                 progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(progressBar, BorderLayout.SOUTH);
+                panel.add(downloadsProgressBar.get(downloadsList.indexOf(download)), BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -107,7 +120,7 @@ public class DownloadPanel extends JPanel implements Serializable {
                 progressBar.setStringPainted(true);
                 progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(progressBar, BorderLayout.SOUTH);
+                panel.add(downloadsProgressBar.get(downloadsList.indexOf(download)), BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -128,7 +141,7 @@ public class DownloadPanel extends JPanel implements Serializable {
                 progressBar.setStringPainted(true);
                 progressBar.setValue(download.getProgressValue());
                 panel.add(downloadInformationLabel, BorderLayout.CENTER);
-                panel.add(progressBar, BorderLayout.SOUTH);
+                panel.add(downloadsProgressBar.get(downloadsList.indexOf(download)), BorderLayout.SOUTH);
                 panel.setBorder(BorderFactory.createCompoundBorder());
                 downloadPanels.add(panel);
             }
@@ -201,7 +214,6 @@ public class DownloadPanel extends JPanel implements Serializable {
                             e.printStackTrace();
                         }
                     }
-
                 }
             });
         }
@@ -211,10 +223,8 @@ public class DownloadPanel extends JPanel implements Serializable {
 
     public void refreshProgressBar () {
         for (Download download : downloadsList) {
-
-            progressBar.setValue(download.getProgressValue());
+            downloadsProgressBar.get(downloadsList.indexOf(download)).setValue(download.getProgressValue());
         }
-
     }
 
     public static void setDownloadsList(Vector<Download> downloadsList) {
@@ -281,9 +291,20 @@ public class DownloadPanel extends JPanel implements Serializable {
     /**
      * This method iterates download lists ann delete selected downloads
      */
-    public static void deleteFromDownloadList() {
+    public static void deleteFromDownloadList()  {
 
         Iterator iterator = downloadPanels.iterator();
+
+        for (JPanel panel : downloadPanels ) {
+            if (isSelected(panel)) {
+                try {
+                    saveDeletedDownloads(downloadsList.get(downloadPanels.indexOf(panel)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
 
         while (iterator.hasNext()) {
             JPanel panel = (JPanel) iterator.next();
@@ -360,7 +381,12 @@ public class DownloadPanel extends JPanel implements Serializable {
      * This method resume downloading of selected and  Paused downloads .
      */
     public static void continueDownloads () {
+
+
         for (JPanel panel : downloadPanels ) {
+
+            System.out.println("sameDownloadNumbers : " + SettingsFrame.sameDownloadNumbers);
+            System.out.println("downloadingNumber : "  + downloadingFilesNumber());
             if (downloadingFilesNumber() == SettingsFrame.sameDownloadNumbers ) {
                 JOptionPane.showMessageDialog(MainFrame.getInstance() , "Out of range Same Time Download ." , "Error" , JOptionPane.ERROR_MESSAGE);
                 break;
@@ -447,6 +473,7 @@ public class DownloadPanel extends JPanel implements Serializable {
             downloadsList.add((Download) it.next()) ;
         }
 
+
     }
 
 
@@ -481,6 +508,23 @@ public class DownloadPanel extends JPanel implements Serializable {
         }
 
         return counter ;
+
+    }
+
+    public static void saveDeletedDownloads (Download download) throws IOException {
+        File file = new File("Saves/removed.jdm") ;
+        if (!file.exists()) {
+            file.createNewFile() ;
+        }
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter(file , true))) {
+            bufferedWriter.write("Name : " + download.getName() +"\n");
+            bufferedWriter.write("URL : " + download.getUrl() + "\n\n\n");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

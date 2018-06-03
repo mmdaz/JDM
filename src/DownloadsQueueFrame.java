@@ -11,6 +11,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The DownloadsQueueFrame program is an application that simply
+ *  get and show and handle them in a queue for download .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since 2018 spring
+ */
 public class DownloadsQueueFrame extends JFrame {
 
     public static JButton delete ;
@@ -28,6 +36,10 @@ public class DownloadsQueueFrame extends JFrame {
 
     }
 
+    /**
+     * This class is a singleton class and this method get a instance of this .
+     * @return a instance of this class
+     */
 
     public static DownloadsQueueFrame getInstance () {
 
@@ -57,15 +69,15 @@ public class DownloadsQueueFrame extends JFrame {
 
 
             mainPanel = new JPanel(new BorderLayout());
-//            if (loadQueue().size() != 0) {
-//                QueuePanel.setDownloadsList(loadQueue());
-//            }
+            if (loadQueue().size() != 0) {
+                QueuePanel.setDownloadsList(loadQueue());
+            }
             mainPanel.add(queuePanel, BorderLayout.CENTER);
             mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
             contentPain.add(mainPanel);
             downloadsQueueFrame.setContentPane(contentPain);
             updateDownloadPanel();
-            downloadsQueueFrame.setVisible(true);
+         //   downloadsQueueFrame.setVisible(true);
 
 
             // add  buttons action listener  :
@@ -115,12 +127,14 @@ public class DownloadsQueueFrame extends JFrame {
         return downloadsQueueFrame ;
     }
 
-
+    /**
+     * The method that updates queue frame .
+     */
     public static void updateDownloadPanel ( ) {
         mainPanel.remove(queuePanel) ;
         queuePanel = new QueuePanel() ;
         mainPanel.add(queuePanel, BorderLayout.CENTER) ;
-       // saveQueue(queuePanel);
+        saveQueue(queuePanel);
         contentPain.revalidate();
         contentPain.repaint();
         downloadsQueueFrame.revalidate();
@@ -128,7 +142,10 @@ public class DownloadsQueueFrame extends JFrame {
 
     }
 
-
+    /**
+     * The method that save queue downloads in a file .
+     * @param queuePanel
+     */
     public static void saveQueue (QueuePanel queuePanel ) {
 
         try (FileOutputStream fs = new FileOutputStream("Saves/queue.jdm")) {
@@ -143,7 +160,10 @@ public class DownloadsQueueFrame extends JFrame {
         }
     }
 
-
+    /**
+     * The method that load queue list from file that they are saved in it .
+     * @return a download list
+     */
     public static ArrayList<Download> loadQueue () {
 
         ArrayList<Download> downloadList = new ArrayList<Download>() ;
@@ -166,6 +186,15 @@ public class DownloadsQueueFrame extends JFrame {
 
     }
 
+    /**
+     * The method that refresh the queue frame and progress bar .
+     */
 
+    public static void refresh () {
+
+        queuePanel.refreshProgressBar();
+        queuePanel.revalidate();
+        queuePanel.repaint();
+    }
 
 }

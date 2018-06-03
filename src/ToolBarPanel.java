@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Collections;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -32,6 +33,7 @@ public class ToolBarPanel extends JPanel {
     private JMenuItem sortByName ;
     private JMenuItem sortByDate ;
     private JMenuItem sortBySize ;
+    private JMenuItem reverce ;
 
   //  public static final SettingsFrame settingsFrame = new SettingsFrame() ;
 
@@ -109,6 +111,7 @@ public class ToolBarPanel extends JPanel {
         sortByName = new JMenuItem("Sort By Name") ;
         sortByDate = new JMenuItem("Sort By Date") ;
         sortBySize = new JMenuItem("Sort By Size") ;
+        reverce = new JMenuItem("Reverce") ;
         toolsMenu.add(newDownloadItem) ;
         toolsMenu.add(pauseDownloadItem) ;
         toolsMenu.add(cancelDownloadItem);
@@ -120,6 +123,7 @@ public class ToolBarPanel extends JPanel {
         toolsMenu.add(sortByName) ;
         toolsMenu.add(sortByDate) ;
         toolsMenu.add(sortBySize) ;
+        toolsMenu.add(reverce) ;
         toolsMenu.add(exitItem) ;
         aboutMenu.add(helpAndAbout) ;
         menuBar.add(toolsMenu) ;
@@ -141,7 +145,7 @@ public class ToolBarPanel extends JPanel {
         setting.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                SettingsFrame settingsFrame = new SettingsFrame() ;
+                Run.settingsFrame.setVisible(true);
                 setting.setEnabled(false);
             }
         });
@@ -191,6 +195,7 @@ public class ToolBarPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 DownloadPanel.addSelectedDownloadsToQueue();
+                DownloadsQueueFrame.updateDownloadPanel();
             }
         });
 
@@ -293,7 +298,21 @@ public class ToolBarPanel extends JPanel {
             }
         });
 
+        sortByDate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DownloadPanel.sortByTime();
+                MainFrame.updateDownloadPanel(1);
+            }
+        });
 
+        reverce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Collections.reverse(DownloadPanel.downloadsList);
+                MainFrame.updateDownloadPanel(1);
+            }
+        });
 
         // add accelactor to items :
 
@@ -359,5 +378,7 @@ public class ToolBarPanel extends JPanel {
 
 
     }
+
+
 
 }

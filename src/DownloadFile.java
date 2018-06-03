@@ -1,12 +1,22 @@
 
+
 import javax.swing.*;
 import java.io.*;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The DownloadFile program is an application that simply
+ * handle the download of the file from web in the separate thread .
+ *
+ * @author Azhdari Muhammad
+ * @version 1.0
+ * @since spring 2018
+ */
 public class DownloadFile extends SwingWorker < String , Integer > {
 
     public static final int BUFFER_SIZE = 4096 ;
@@ -26,18 +36,26 @@ public class DownloadFile extends SwingWorker < String , Integer > {
 
     }
 
-
+    /**
+     * The method that update GUI .
+     * @param chunks
+     */
     @Override
     protected void process(List<Integer> chunks) {
 
         double time = ( finishTime - startTime ) / Math.pow(10,9) ;
         double speed = bytesRead / Math.pow(10,3) / time ;
         download.setSpeed((int) speed);
-        System.out.println("processed");
+        System.out.println("processed" + download.getName());
 
         MainFrame.refresh();
+        DownloadsQueueFrame.refresh();
     }
 
+    /**
+     * The method that download and read file from web .
+     * @return
+     */
     @Override
     protected String doInBackground() {
         System.out.println(download.getStatus());
@@ -100,9 +118,9 @@ public class DownloadFile extends SwingWorker < String , Integer > {
 
             util.disconnect();
 
-        }
-
-        catch (IOException ex) {
+        } catch (UnknownHostException e) {
+         JOptionPane.showMessageDialog(MainFrame.getInstance() , "UnknownHost !!!" , "Error" ,JOptionPane.ERROR_MESSAGE) ;
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(MainFrame.getInstance(), "Error downloading file: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -116,6 +134,9 @@ public class DownloadFile extends SwingWorker < String , Integer > {
 
     }
 
+    /**
+     * The method
+     */
     protected void done() {
         try {
             get() ;
@@ -136,6 +157,7 @@ public class DownloadFile extends SwingWorker < String , Integer > {
             download.setStatus("completed");
             download.setProgressValue(100);
             download.setFinishedTime(new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
+            MainFrame.updateDownloadPanel(1);
         }
 
         if (QueuePanel.inQueue(download)) {

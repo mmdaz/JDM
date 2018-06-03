@@ -4,6 +4,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+/**
+ * The Download Frame program is an application that simply
+ *  is a frame that show more information of a download .
+ *
+ * @author Azhdari Muhammad
+ * @since spring 2018
+ * @version 1.0
+ */
 public class DownloadFrame extends JFrame {
 
     private JButton pause ;
